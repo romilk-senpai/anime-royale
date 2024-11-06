@@ -7,9 +7,8 @@
 #include "player.h"
 #include "time.h"
 
-const int SCREEN_WIDTH = 800;
-const int SCREEN_HEIGHT = 600;
-const float PLAYER_SPEED = 5;
+#define SCREEN_WIDTH 800
+#define SCREEN_HEIGHT 600
 
 typedef struct {
   SDL_Window *window;
@@ -21,6 +20,7 @@ typedef struct {
 } GameState;
 
 GameState *init_game();
+void handle_time(GameState *state);
 void process_input(GameState *state);
 void update(GameState *state);
 void render(GameState *state);

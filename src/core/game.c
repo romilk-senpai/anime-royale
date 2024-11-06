@@ -37,6 +37,13 @@ GameState *init_game() {
   return state;
 }
 
+void handle_time(GameState *state) {
+  Uint32 current_time = SDL_GetTicks();
+  float delta_time = (current_time - state->time->last_time) / 1000.0f;
+  state->time->delta_time = delta_time;
+  state->time->last_time = current_time;
+}
+
 void process_input(GameState *state) {
   SDL_Event e;
   while (SDL_PollEvent(&e) != 0) {
@@ -49,10 +56,10 @@ void process_input(GameState *state) {
   const Uint8 *keystate = SDL_GetKeyboardState(NULL);
   Vector2 in_move = vector2_zero();
   if (keystate[SDL_SCANCODE_W]) {
-    in_move.y++;
+    in_move.y--;
   }
   if (keystate[SDL_SCANCODE_S]) {
-    in_move.y--;
+    in_move.y++;
   }
   if (keystate[SDL_SCANCODE_A]) {
     in_move.x--;
@@ -65,7 +72,7 @@ void process_input(GameState *state) {
 }
 
 void update(GameState *state) {
-  Vector2 movement = vector2_mul_scalar(state->input->movement, PLAYER_SPEED);
+  Vector2 movement = vector2_mul_scalar(state->input->movement, 350.0);
   movement = vector2_mul_scalar(movement, state->time->delta_time);
   state->player->position = vector2_add(state->player->position, movement);
 }
