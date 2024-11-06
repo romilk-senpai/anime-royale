@@ -1,0 +1,44 @@
+[
+{
+  "directory": "/home/animezaya/projects/anime-royale/build",
+  "command": "clang  -I/home/animezaya/projects/anime-royale/SDL2-2.30.9/include -g -std=gnu99 -o CMakeFiles/anime-royale.dir/src/core/drawables.c.o -c /home/animezaya/projects/anime-royale/src/core/drawables.c",
+  "file": "/home/animezaya/projects/anime-royale/src/core/drawables.c",
+  "output": "CMakeFiles/anime-royale.dir/src/core/drawables.c.o"
+},
+{
+  "directory": "/home/animezaya/projects/anime-royale/build",
+  "command": "clang  -I/home/animezaya/projects/anime-royale/SDL2-2.30.9/include -g -std=gnu99 -o CMakeFiles/anime-royale.dir/src/core/game.c.o -c /home/animezaya/projects/anime-royale/src/core/game.c",
+  "file": "/home/animezaya/projects/anime-royale/src/core/game.c",
+  "output": "CMakeFiles/anime-royale.dir/src/core/game.c.o"
+},
+{
+  "directory": "/home/animezaya/projects/anime-royale/build",
+  "command": "clang  -I/home/animezaya/projects/anime-royale/SDL2-2.30.9/include -g -std=gnu99 -o CMakeFiles/anime-royale.dir/src/core/input.c.o -c /home/animezaya/projects/anime-royale/src/core/input.c",
+  "file": "/home/animezaya/projects/anime-royale/src/core/input.c",
+  "output": "CMakeFiles/anime-royale.dir/src/core/input.c.o"
+},
+{
+  "directory": "/home/animezaya/projects/anime-royale/build",
+  "command": "clang  -I/home/animezaya/projects/anime-royale/SDL2-2.30.9/include -g -std=gnu99 -o CMakeFiles/anime-royale.dir/src/core/player.c.o -c /home/animezaya/projects/anime-royale/src/core/player.c",
+  "file": "/home/animezaya/projects/anime-royale/src/core/player.c",
+  "output": "CMakeFiles/anime-royale.dir/src/core/player.c.o"
+},
+{
+  "directory": "/home/animezaya/projects/anime-royale/build",
+  "command": "clang  -I/home/animezaya/projects/anime-royale/SDL2-2.30.9/include -g -std=gnu99 -o CMakeFiles/anime-royale.dir/src/core/time.c.o -c /home/animezaya/projects/anime-royale/src/core/time.c",
+  "file": "/home/animezaya/projects/anime-royale/src/core/time.c",
+  "output": "CMakeFiles/anime-royale.dir/src/core/time.c.o"
+},
+{
+  "directory": "/home/animezaya/projects/anime-royale/build",
+  "command": "clang  -I/home/animezaya/projects/anime-royale/SDL2-2.30.9/include -g -std=gnu99 -o CMakeFiles/anime-royale.dir/src/core/vector2.c.o -c /home/animezaya/projects/anime-royale/src/core/vector2.c",
+  "file": "/home/animezaya/projects/anime-royale/src/core/vector2.c",
+  "output": "CMakeFiles/anime-royale.dir/src/core/vector2.c.o"
+},
+{
+  "directory": "/home/animezaya/projects/anime-royale/build",
+  "command": "clang  -I/home/animezaya/projects/anime-royale/SDL2-2.30.9/include -g -std=gnu99 -o CMakeFiles/anime-royale.dir/src/main.c.o -c /home/animezaya/projects/anime-royale/src/main.c",
+  "file": "/home/animezaya/projects/anime-royale/src/main.c",
+  "output": "CMakeFiles/anime-royale.dir/src/main.c.o"
+}
+]
