@@ -21,5 +21,5 @@ file(GLOB_RECURSE SOURCES "src/*.c" "src/**/*.c")
 add_executable(anime-royale ${SOURCES})
 
 # Link the SDL2 library
-target_link_libraries(anime-royale SDL2)
+target_link_libraries(anime-royale SDL2 m)
 

@@ -1,3 +1,0 @@
-/home/animezaya/projects/anime-royale/build/CMakeFiles/anime-royale.dir
-/home/animezaya/projects/anime-royale/build/CMakeFiles/edit_cache.dir
-/home/animezaya/projects/anime-royale/build/CMakeFiles/rebuild_cache.dir
