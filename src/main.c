@@ -9,8 +9,8 @@ int main(int argc, char *args[]) {
       break;
     }
 
-    update(state);
-    render(state);
+    update_game(state);
+    render_game(state);
   }
-  quit(state);
+  quit_game(state);
 }

@@ -22,8 +22,8 @@ typedef struct {
 GameState *init_game();
 void handle_time(GameState *state);
 void process_input(GameState *state);
-void update(GameState *state);
-void render(GameState *state);
-void quit(GameState *state);
+void update_game(GameState *state);
+void render_game(GameState *state);
+void quit_game(GameState *state);
 
 #endif
