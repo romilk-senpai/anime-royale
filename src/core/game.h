@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_video.h>
+#include "GameObjectManager.h"
 #include "input.h"
 #include "player.h"
 #include "time.h"
@@ -17,6 +18,7 @@ typedef struct {
   Time *time;
   Player *player;
   Input *input;
+  GameObjectManager *gameObjectManager;
 } GameState;
 
 GameState *init_game();

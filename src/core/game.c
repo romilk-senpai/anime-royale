@@ -71,13 +71,13 @@ void process_input(GameState *state) {
   state->input->movement = vector2_normalize(in_move);
 }
 
-void update(GameState *state) {
+void update_game(GameState *state) {
   Vector2 movement = vector2_mul_scalar(state->input->movement, 350.0);
   movement = vector2_mul_scalar(movement, state->time->delta_time);
   state->player->position = vector2_add(state->player->position, movement);
 }
 
-void render(GameState *state) {
+void render_game(GameState *state) {
   SDL_SetRenderDrawColor(state->renderer, 0, 0, 0, 255);
   SDL_RenderClear(state->renderer);
 
@@ -88,7 +88,7 @@ void render(GameState *state) {
   SDL_RenderPresent(state->renderer);
 }
 
-void quit(GameState *state) {
+void quit_game(GameState *state) {
   SDL_DestroyRenderer(state->renderer);
   SDL_DestroyWindow(state->window);
   SDL_Quit();
