@@ -3,9 +3,8 @@
 
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_video.h>
-#include "GameObjectManager.h"
+#include "go_pool.h"
 #include "input.h"
-#include "player.h"
 #include "time.h"
 
 #define SCREEN_WIDTH 800
@@ -16,9 +15,8 @@ typedef struct {
   SDL_Renderer *renderer;
   int quit;
   Time *time;
-  Player *player;
   Input *input;
-  GameObjectManager *gameObjectManager;
+  GOPool *go_pool;
 } GameState;
 
 GameState *init_game();

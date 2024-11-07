@@ -1,7 +1,4 @@
 #include "game.h"
-#include "drawables.h"
-#include "input.h"
-#include "vector2.h"
 #include <SDL2/SDL.h>
 #include <stdlib.h>
 
@@ -27,12 +24,11 @@ GameState *init_game() {
   }
 
   Time *time = time_new();
-  Player *player = new_player();
   Input *input = input_new();
 
   GameState *state = malloc(sizeof(GameState));
 
-  *state = (GameState){window, renderer, 0, time, player, input};
+  *state = (GameState){window, renderer, 0, time, input};
 
   return state;
 }
@@ -71,19 +67,27 @@ void process_input(GameState *state) {
   state->input->movement = vector2_normalize(in_move);
 }
 
+void update_go_map(key_value_pair *kvp, void *context) {
+  GameState *state = (GameState *)context;
+  GameObject *go = (GameObject *)kvp->value;
+  go->update(state, go->binding);
+}
+
 void update_game(GameState *state) {
-  Vector2 movement = vector2_mul_scalar(state->input->movement, 350.0);
-  movement = vector2_mul_scalar(movement, state->time->delta_time);
-  state->player->position = vector2_add(state->player->position, movement);
+  hash_map_for_each(state->go_pool->go_map, update_go_map, state);
+}
+
+void render_go_map(key_value_pair *kvp, void *context) {
+  GameState *state = (GameState *)context;
+  GameObject *go = (GameObject *)kvp->value;
+  go->render(state, go->binding);
 }
 
 void render_game(GameState *state) {
   SDL_SetRenderDrawColor(state->renderer, 0, 0, 0, 255);
   SDL_RenderClear(state->renderer);
 
-  SDL_SetRenderDrawColor(state->renderer, 255, 0, 0, 255);
-  SDL_Rect player_rect = player_drawable(state->player);
-  SDL_RenderFillRect(state->renderer, &player_rect);
+  hash_map_for_each(state->go_pool->go_map, render_go_map, state);
 
   SDL_RenderPresent(state->renderer);
 }

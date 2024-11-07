@@ -2,19 +2,16 @@
 #include <math.h>
 
 Vector2 vector2_zero() {
-  Vector2 v = {0, 0};
+  Vector2 v = {0.0, 0.0};
   return v;
 }
 
 Vector2 vector2_normalize(Vector2 v) {
-  float magnitude =
-      sqrt(v.x * v.x + v.y * v.y); // Calculate the magnitude of the vector
-
+  float magnitude = sqrt(v.x * v.x + v.y * v.y);
   if (magnitude != 0) {
     v.x /= magnitude;
     v.y /= magnitude;
   }
-
   return v;
 }
 
