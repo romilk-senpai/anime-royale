@@ -15,12 +15,19 @@ set(RCDS_PATH ${CMAKE_SOURCE_DIR}/librcds)
 include_directories(${RCDS_PATH}/include)
 link_directories(${RCDS_PATH}/lib)
 
-# Add your source files
-file(GLOB_RECURSE SOURCES "src/*.c" "src/**/*.c")
+# Core library
+file(GLOB_RECURSE CORE_SOURCES "src/core/*.c")
+add_library(core STATIC ${CORE_SOURCES})
+
+# Add main game source files
+file(GLOB_RECURSE GAME_SOURCES "src/game/*.c")
 
 # Add executable
-add_executable(anime-royale ${SOURCES})
+add_executable(anime-royale ${GAME_SOURCES})
 
-# Link the SDL2 library
-target_link_libraries(anime-royale SDL2 m rcds)
+target_link_libraries(core rcds)
+target_link_libraries(anime-royale core SDL2 m rcds)
+
+target_include_directories(core PUBLIC src/core)
+target_include_directories(anime-royale PUBLIC src/game)
 
