@@ -1,12 +1,13 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 
-#include "game.h"
 #include "vector2.h"
 #include <stdint.h>
 
-typedef void (*update_go)(GameState *, void *);
-typedef void (*render_go)(GameState *, void *);
+struct GameState;
+
+typedef void (*update_go)(struct GameState *, void *);
+typedef void (*render_go)(struct GameState *, void *);
 
 typedef struct {
   uint32_t instance_id;

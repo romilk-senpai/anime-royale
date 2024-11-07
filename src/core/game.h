@@ -10,7 +10,7 @@
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
 
-typedef struct {
+typedef struct GameState {
   SDL_Window *window;
   SDL_Renderer *renderer;
   int quit;

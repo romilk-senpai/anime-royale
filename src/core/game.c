@@ -1,4 +1,5 @@
 #include "game.h"
+#include "go_pool.h"
 #include <SDL2/SDL.h>
 #include <stdlib.h>
 
@@ -25,10 +26,11 @@ GameState *init_game() {
 
   Time *time = time_new();
   Input *input = input_new();
+  GOPool *go_pool = go_pool_new();
 
   GameState *state = malloc(sizeof(GameState));
 
-  *state = (GameState){window, renderer, 0, time, input};
+  *state = (GameState){window, renderer, 0, time, input, go_pool};
 
   return state;
 }

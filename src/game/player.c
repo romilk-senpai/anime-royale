@@ -20,6 +20,7 @@ Player *player_new(GameState *state) {
                             .angle = 0.0,
                             .update = player_update,
                             .render = player_render};
+  p->go = player_go;
   return p;
 }
 
