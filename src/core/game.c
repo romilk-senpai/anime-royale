@@ -1,6 +1,7 @@
 #include "game.h"
 #include "go_pool.h"
 #include <SDL2/SDL.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 GameState *init_game() {
