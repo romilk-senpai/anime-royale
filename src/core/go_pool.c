@@ -15,7 +15,7 @@ static uint32_t djb2(void *val) {
 
 GOPool *go_pool_new() {
   GOPool *go_manager = malloc(sizeof(GOPool));
-  hash_map *map = hash_map_create_cap(1000, djb2);
+  hash_map *map = hash_map_create_cap(10, djb2);
   *go_manager = (GOPool){map, 0};
   return go_manager;
 }

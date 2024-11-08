@@ -1,6 +1,7 @@
 #include "game.h"
 #include "go_pool.h"
 #include <SDL2/SDL.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -72,7 +73,8 @@ void process_input(GameState *state) {
 
 void update_go_map(key_value_pair *kvp, void *context) {
   GameState *state = (GameState *)context;
-  GameObject *go = (GameObject *)kvp->value;
+  uint32_t id = *(uint32_t *)kvp->key;
+  GameObject *go = *(GameObject **)kvp->value;
   go->update(state, go->binding);
 }
 
@@ -82,7 +84,7 @@ void update_game(GameState *state) {
 
 void render_go_map(key_value_pair *kvp, void *context) {
   GameState *state = (GameState *)context;
-  GameObject *go = (GameObject *)kvp->value;
+  GameObject *go = *(GameObject **)kvp->value;
   go->render(state, go->binding);
 }
 
