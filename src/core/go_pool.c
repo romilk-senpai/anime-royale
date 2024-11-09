@@ -24,7 +24,7 @@ uint32_t go_pool_new_id(GOPool *go_pool) { return go_pool->next_id++; }
 
 void go_pool_bind(GOPool *go_pool, GameObject *go) {
   if (hash_map_contains(go_pool->go_map, &go->instance_id) == 1) {
-    printf(stderr, "pool already contains an object with id %zu", go->instance_id);
+    fprintf(stderr, "pool already contains an object with id %u", go->instance_id);
     return;
   }
   hash_map_set(go_pool->go_map, &go->instance_id, go);
