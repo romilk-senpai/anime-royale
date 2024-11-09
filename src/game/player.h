@@ -6,9 +6,6 @@
 #include <vector2.h>
 
 typedef struct {
-	Vector2 position;
-	Vector2 movement;
-	float angle;
 	GameObject *go;
 } Player;
 
