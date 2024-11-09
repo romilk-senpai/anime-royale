@@ -37,6 +37,20 @@ GameState *init_game() {
   return state;
 }
 
+void game_run(GameState *state) {
+  while (state->quit == 0) {
+    handle_time(state);
+    process_input(state);
+    if (state->quit == 1) {
+      break;
+    }
+
+    update_game(state);
+    render_game(state);
+  }
+  quit_game(state);
+}
+
 void handle_time(GameState *state) {
   Uint32 current_time = SDL_GetTicks();
   float delta_time = (current_time - state->time->last_time) / 1000.0f;
@@ -74,7 +88,7 @@ void process_input(GameState *state) {
 void update_go_map(key_value_pair *kvp, void *context) {
   GameState *state = (GameState *)context;
   uint32_t id = *(uint32_t *)kvp->key;
-  GameObject *go = *(GameObject **)kvp->value;
+  GameObject *go = (GameObject *)kvp->value;
   go->update(state, go->binding);
 }
 
@@ -84,7 +98,7 @@ void update_game(GameState *state) {
 
 void render_go_map(key_value_pair *kvp, void *context) {
   GameState *state = (GameState *)context;
-  GameObject *go = *(GameObject **)kvp->value;
+  GameObject *go = (GameObject *)kvp->value;
   go->render(state, go->binding);
 }
 

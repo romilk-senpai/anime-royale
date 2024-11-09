@@ -20,6 +20,7 @@ typedef struct GameState {
 } GameState;
 
 GameState *init_game();
+void game_run(GameState *state);
 void handle_time(GameState *state);
 void process_input(GameState *state);
 void update_game(GameState *state);
