@@ -6,17 +6,12 @@
 #include <vector2.h>
 
 Player *player_new(GameState *state) {
-  Player *p = malloc(sizeof(Player));
+  Player *player = malloc(sizeof(Player));
 
-  GameObject *go = malloc(sizeof(GameObject));
-  *go = (GameObject){.instance_id = go_pool_new_id(state->go_pool),
-                     .binding = p,
-                     .position = vector2_zero(),
-                     .angle = 0.0,
-                     .update = player_update,
-                     .render = player_render};
-  p->go = go;
-  return p;
+  GameObject *go = go_create(go_pool_new_id(state->go_pool), player,
+                             player_update, player_render);
+  player->go = go;
+  return player;
 }
 
 static void player_update(GameState *state, void *context) {

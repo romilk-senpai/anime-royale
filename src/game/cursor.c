@@ -5,22 +5,18 @@
 #include <SDL2/SDL_surface.h>
 
 Cursor *cursor_new(GameState *state) {
-  Cursor *c = malloc(sizeof(Cursor));
+  Cursor *cursor = malloc(sizeof(Cursor));
 
-  GameObject *go = malloc(sizeof(GameObject));
-  *go = (GameObject){.instance_id = go_pool_new_id(state->go_pool),
-                     .binding = c,
-                     .position = vector2_zero(),
-                     .angle = 0.0,
-                     .update = cursor_update,
-                     .render = cursor_render};
-  c->go = go;
+  GameObject *go = go_create(go_pool_new_id(state->go_pool), cursor,
+                             cursor_update, cursor_render);
+
+  cursor->go = go;
 
   SDL_Surface *surface = IMG_Load("assets/cursor.png");
-  c->cursor_tex = SDL_CreateTextureFromSurface(state->renderer, surface);
+  cursor->cursor_tex = SDL_CreateTextureFromSurface(state->renderer, surface);
   SDL_FreeSurface(surface);
 
-  return c;
+  return cursor;
 }
 
 static void cursor_update(GameState *state, void *context) {
