@@ -1,7 +1,9 @@
 #include "player.h"
+#include "weapons/pistol.h"
 #include <SDL2/SDL_render.h>
 #include <game.h>
 #include <gameobject.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <vector2.h>
 
@@ -11,6 +13,10 @@ Player *player_new(GameState *state) {
   GameObject *go = go_create(go_pool_new_id(state->go_pool), player,
                              player_update, player_render);
   player->go = go;
+
+  Pistol *pistol = pistol_new(state);
+  player->weapon = pistol->weapon;
+
   go_pool_bind(state->go_pool, go);
 
   return player;
@@ -21,6 +27,12 @@ static void player_update(GameState *state, void *context) {
   Vector2 movement = vector2_mul_scalar(state->input->movement, 350.0);
   movement = vector2_mul_scalar(movement, state->time->delta_time);
   player->go->position = vector2_add(player->go->position, movement);
+
+  player->weapon->go->position = player->go->position;
+
+  if (state->input->fire == 1) {
+    player->weapon->fire(state, player->weapon->binding);
+  }
 }
 
 static void player_render(GameState *state, void *context) {

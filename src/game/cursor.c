@@ -11,11 +11,12 @@ Cursor *cursor_new(GameState *state) {
   GameObject *go = go_create(go_pool_new_id(state->go_pool), cursor,
                              cursor_update, cursor_render);
   cursor->go = go;
-  go_pool_bind(state->go_pool, go);
 
   SDL_Surface *surface = IMG_Load("assets/cursor.png");
   cursor->cursor_tex = SDL_CreateTextureFromSurface(state->renderer, surface);
   SDL_FreeSurface(surface);
+
+  go_pool_bind(state->go_pool, go);
 
   return cursor;
 }
