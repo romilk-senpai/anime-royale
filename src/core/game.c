@@ -2,6 +2,7 @@
 #include "go_pool.h"
 #include "vector2.h"
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_keycode.h>
 #include <SDL2/SDL_mouse.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -63,6 +64,7 @@ void handle_time(GameState *state) {
 
 void process_input(GameState *state) {
   state->input->fire = 0;
+  *state->input->item_slot_input = (ItemSoltInput){0, 0, 0, 0};
 
   SDL_Event e;
   while (SDL_PollEvent(&e) != 0) {
@@ -70,6 +72,18 @@ void process_input(GameState *state) {
     case SDL_QUIT:
       state->quit = 1;
       return;
+
+    case SDL_KEYDOWN:
+      switch (e.key.keysym.sym) {
+      case SDLK_1:
+        state->input->item_slot_input->item1 = 1;
+      case SDLK_2:
+        state->input->item_slot_input->item2 = 1;
+      case SDLK_3:
+        state->input->item_slot_input->item3 = 1;
+      case SDLK_4:
+        state->input->item_slot_input->item4 = 1;
+      }
     }
   }
 
