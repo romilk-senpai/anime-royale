@@ -18,7 +18,7 @@ typedef struct {
   render_go render;
 } GameObject;
 
-GameObject *go_create(uint32_t instance_id, void *binding,
-                            update_go update, render_go render);
+GameObject *go_create(uint32_t instance_id, void *binding, update_go update,
+                      render_go render);
 
 #endif

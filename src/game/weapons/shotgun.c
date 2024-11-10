@@ -4,7 +4,7 @@
 #include "vector2.h"
 #include "weapon.h"
 
-const float shotgun_FIRE_RATE = 60.0;
+const float SHOTGUN_FIRE_RATE = 2.0f;
 
 Shotgun *shotgun_new(GameState *state) {
   Shotgun *shotgun = malloc(sizeof(Shotgun));
@@ -24,6 +24,10 @@ Shotgun *shotgun_new(GameState *state) {
 static void shotgun_fire(GameState *state, void *context) {
   Shotgun *shotgun = (Shotgun *)context;
 
+  if (state->time->time - shotgun->last_shot_time < 1.0f / SHOTGUN_FIRE_RATE) {
+    return;
+  }
+
   Vector2 mouse_forward = vector2_normalize(
       vector2_sub(state->input->mouse_pos, shotgun->go->position));
   Vector2 mouse_left = vector2_rotate(mouse_forward, 30.0f);
@@ -35,6 +39,8 @@ static void shotgun_fire(GameState *state, void *context) {
       bullet_new(state, shotgun->go->position, mouse_left, 5.0f);
   BasicBullet *bullet_l =
       bullet_new(state, shotgun->go->position, mouse_right, 5.0f);
+
+  shotgun->last_shot_time = state->time->time;
 }
 
 static void shotgun_update(GameState *state, void *context) {}

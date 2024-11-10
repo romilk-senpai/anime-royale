@@ -6,7 +6,7 @@
 
 typedef struct {
   hash_map *go_map;
-  int next_id;
+  uint32_t next_id;
 } GOPool;
 
 GOPool *go_pool_new();

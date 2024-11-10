@@ -70,8 +70,6 @@ void process_input(GameState *state) {
     case SDL_QUIT:
       state->quit = 1;
       return;
-    case SDL_MOUSEBUTTONDOWN:
-      state->input->fire = 1;
     }
   }
 
@@ -93,8 +91,9 @@ void process_input(GameState *state) {
   int mouse_x;
   int mouse_y;
 
-  SDL_GetMouseState(&mouse_x, &mouse_y);
+  Uint32 mousestate = SDL_GetMouseState(&mouse_x, &mouse_y);
 
+  state->input->fire = mousestate & SDL_BUTTON(SDL_BUTTON_LEFT);
   state->input->mouse_pos = (Vector2){mouse_x, mouse_y};
   state->input->movement = vector2_normalize(in_move);
 }
