@@ -3,7 +3,6 @@
 #include <SDL2/SDL_render.h>
 #include <game.h>
 #include <gameobject.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <vector2.h>
 
