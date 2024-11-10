@@ -1,5 +1,6 @@
 #include "player.h"
 #include "weapons/pistol.h"
+#include "weapons/shotgun.h"
 #include <SDL2/SDL_render.h>
 #include <game.h>
 #include <gameobject.h>
@@ -13,8 +14,9 @@ Player *player_new(GameState *state) {
                              player_update, player_render);
   player->go = go;
 
-  Pistol *pistol = pistol_new(state);
-  player->weapon = pistol->weapon;
+  //Pistol *pistol = pistol_new(state);
+  Shotgun *shotgun = shotgun_new(state);
+  player->weapon = shotgun->weapon;
 
   go_pool_bind(state->go_pool, go);
 
