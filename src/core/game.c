@@ -56,6 +56,7 @@ void game_run(GameState *state) {
 void handle_time(GameState *state) {
   Uint32 current_time = SDL_GetTicks();
   float delta_time = (current_time - state->time->last_time) / 1000.0f;
+  state->time->time = current_time / 1000.0f;
   state->time->delta_time = delta_time;
   state->time->last_time = current_time;
 }
