@@ -5,6 +5,7 @@
 
 typedef struct {
   Vector2 movement;
+  Vector2 mouse_pos;
 } Input;
 
 Input *input_new();

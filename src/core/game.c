@@ -1,6 +1,8 @@
 #include "game.h"
 #include "go_pool.h"
+#include "vector2.h"
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_mouse.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -82,6 +84,12 @@ void process_input(GameState *state) {
     in_move.x++;
   }
 
+  int mouse_x;
+  int mouse_y;
+
+  SDL_GetMouseState(&mouse_x, &mouse_y);
+
+  state->input->mouse_pos = (Vector2){mouse_x, mouse_y};
   state->input->movement = vector2_normalize(in_move);
 }
 
