@@ -26,10 +26,10 @@ static void player_update(GameState *state, void *context) {
 static void player_render(GameState *state, void *context) {
   Player *player = (Player *)context;
   SDL_Rect rect;
-  rect.x = player->go->position.x;
-  rect.y = player->go->position.y;
   rect.w = 50;
   rect.h = 50;
-  SDL_SetRenderDrawColor(state->renderer, 255, 0, 0, 255);
+  rect.x = player->go->position.x - rect.w / 2.0;
+  rect.y = player->go->position.y - rect.h / 2.0;
+  SDL_SetRenderDrawColor(state->renderer, 0, 255, 0, 255);
   SDL_RenderFillRect(state->renderer, &rect);
 }
