@@ -93,6 +93,8 @@ void process_input(GameState *state) {
   int mouse_x;
   int mouse_y;
 
+  SDL_GetMouseState(&mouse_x, &mouse_y);
+
   state->input->mouse_pos = (Vector2){mouse_x, mouse_y};
   state->input->movement = vector2_normalize(in_move);
 }
