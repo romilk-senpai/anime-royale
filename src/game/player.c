@@ -11,6 +11,8 @@ Player *player_new(GameState *state) {
   GameObject *go = go_create(go_pool_new_id(state->go_pool), player,
                              player_update, player_render);
   player->go = go;
+  go_pool_bind(state->go_pool, go);
+
   return player;
 }
 
