@@ -19,14 +19,14 @@ Player *player_new(GameState *state) {
   return p;
 }
 
-void player_update(GameState *state, void *context) {
+static void player_update(GameState *state, void *context) {
   Player *player = (Player *)context;
   Vector2 movement = vector2_mul_scalar(state->input->movement, 350.0);
   movement = vector2_mul_scalar(movement, state->time->delta_time);
   player->go->position = vector2_add(player->go->position, movement);
 }
 
-void player_render(GameState *state, void *context) {
+static void player_render(GameState *state, void *context) {
   Player *player = (Player *)context;
   SDL_Rect rect;
   rect.x = player->go->position.x;
