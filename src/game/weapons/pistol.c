@@ -3,7 +3,7 @@
 #include "game.h"
 #include "weapon.h"
 
-const float PISTOL_FIRE_RATE = 60.0;
+const float PISTOL_FIRE_RATE = 4.0f;
 
 Pistol *pistol_new(GameState *state) {
   Pistol *pistol = malloc(sizeof(Pistol));
@@ -22,11 +22,18 @@ Pistol *pistol_new(GameState *state) {
 
 static void pistol_fire(GameState *state, void *context) {
   Pistol *pistol = (Pistol *)context;
+
+  if (state->time->time - pistol->last_shot_time < 1.0f / PISTOL_FIRE_RATE) {
+    return;
+  }
+
   BasicBullet *bullet =
       bullet_new(state, pistol->go->position,
                  vector2_normalize(vector2_sub(state->input->mouse_pos,
                                                pistol->go->position)),
                  5.0f);
+
+  pistol->last_shot_time = state->time->time;
 }
 
 static void pistol_update(GameState *state, void *context) {}
