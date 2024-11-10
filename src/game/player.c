@@ -1,6 +1,7 @@
 #include "player.h"
 #include "weapons/pistol.h"
 #include "weapons/shotgun.h"
+#include "weapons/weapon.h"
 #include <SDL2/SDL_render.h>
 #include <game.h>
 #include <gameobject.h>
@@ -14,9 +15,15 @@ Player *player_new(GameState *state) {
                              player_update, player_render);
   player->go = go;
 
-  //Pistol *pistol = pistol_new(state);
+  Pistol *pistol = pistol_new(state);
   Shotgun *shotgun = shotgun_new(state);
-  player->weapon = shotgun->weapon;
+
+  player->weapon_inv = malloc(sizeof(Weapon) * 4);
+
+  player->weapon_inv[0] = pistol->weapon;
+  player->weapon_inv[1] = shotgun->weapon;
+
+  player->weapon = player->weapon_inv[0];
 
   go_pool_bind(state->go_pool, go);
 
@@ -28,6 +35,12 @@ static void player_update(GameState *state, void *context) {
   Vector2 movement = vector2_mul_scalar(state->input->movement, 350.0);
   movement = vector2_mul_scalar(movement, state->time->delta_time);
   player->go->position = vector2_add(player->go->position, movement);
+
+  if (state->input->item_slot_input->item1 == 1) {
+    player->weapon = player->weapon_inv[0];
+  } else if (state->input->item_slot_input->item2 == 1) {
+    player->weapon = player->weapon_inv[1];
+  }
 
   player->weapon->go->position = player->go->position;
 

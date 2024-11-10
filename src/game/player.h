@@ -7,6 +7,7 @@
 
 typedef struct {
 	GameObject *go;
+	Weapon **weapon_inv;
 	Weapon *weapon;
 } Player;
 
