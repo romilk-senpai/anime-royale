@@ -30,3 +30,11 @@ Vector2 vector2_mul(Vector2 v1, Vector2 v2) {
 Vector2 vector2_mul_scalar(Vector2 v, float f) {
   return (Vector2){v.x * f, v.y * f};
 }
+
+Vector2 vector2_rotate(Vector2 v, float angle) {
+  float rad = angle * M_PI / 180.0f;
+  float cos_theta = cos(rad);
+  float sin_theta = sin(rad);
+  return (Vector2){v.x * cos_theta - v.y * sin_theta,
+                   v.x * sin_theta + v.y * cos_theta};
+}
