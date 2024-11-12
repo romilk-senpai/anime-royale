@@ -1,5 +1,6 @@
 #include "shotgun.h"
 #include "basic_bullet.h"
+#include "camera.h"
 #include "game.h"
 #include "vector2.h"
 #include "weapon.h"
@@ -29,7 +30,8 @@ static void shotgun_fire(GameState *state, void *context) {
   }
 
   Vector2 mouse_forward = vector2_normalize(
-      vector2_sub(state->input->mouse_pos, shotgun->go->position));
+      vector2_sub(state->input->mouse_pos,
+                  world_to_screen_pos(state->camera, shotgun->go->position)));
   Vector2 mouse_left = vector2_rotate(mouse_forward, 30.0f);
   Vector2 mouse_right = vector2_rotate(mouse_forward, -30.0f);
 

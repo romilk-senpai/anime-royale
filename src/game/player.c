@@ -1,4 +1,5 @@
 #include "player.h"
+#include "camera.h"
 #include "weapons/pistol.h"
 #include "weapons/shotgun.h"
 #include "weapons/weapon.h"
@@ -47,6 +48,8 @@ static void player_update(GameState *state, void *context) {
   if (state->input->fire == 1) {
     player->weapon->fire(state, player->weapon->binding);
   }
+
+  state->camera->position = player->go->position;
 }
 
 static void player_render(GameState *state, void *context) {
@@ -54,8 +57,14 @@ static void player_render(GameState *state, void *context) {
   SDL_Rect rect;
   rect.w = 50;
   rect.h = 50;
-  rect.x = player->go->position.x - rect.w / 2.0;
-  rect.y = player->go->position.y - rect.h / 2.0;
+
+  Vector2 render_pos = world_to_screen_pos(
+      state->camera, (Vector2){player->go->position.x - rect.w / 2.0,
+                               player->go->position.y - rect.h / 2.0});
+
+  rect.x = render_pos.x;
+  rect.y = render_pos.y;
+
   SDL_SetRenderDrawColor(state->renderer, 0, 255, 0, 255);
   SDL_RenderFillRect(state->renderer, &rect);
 }

@@ -1,7 +1,10 @@
 #include "pistol.h"
 #include "basic_bullet.h"
+#include "camera.h"
 #include "game.h"
+#include "vector2.h"
 #include "weapon.h"
+#include <stdio.h>
 
 const float PISTOL_FIRE_RATE = 4.0f;
 
@@ -27,11 +30,14 @@ static void pistol_fire(GameState *state, void *context) {
     return;
   }
 
+  Vector2 direction = vector2_normalize(
+      vector2_sub(state->input->mouse_pos,
+                  world_to_screen_pos(state->camera, pistol->go->position)));
+
+  printf("%.2f %.2f\n", direction.x, direction.y);
+
   BasicBullet *bullet =
-      bullet_new(state, pistol->go->position,
-                 vector2_normalize(vector2_sub(state->input->mouse_pos,
-                                               pistol->go->position)),
-                 5.0f);
+      bullet_new(state, pistol->go->position, direction, 5.0f);
 
   pistol->last_shot_time = state->time->time;
 }
