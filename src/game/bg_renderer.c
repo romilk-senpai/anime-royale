@@ -28,8 +28,8 @@ static void bg_renderer_update(GameState *state, void *context) {}
 static void bg_renderer_render(GameState *state, void *context) {
   BGRenderer *bg_renderer = (BGRenderer *)context;
 
-  int bg_wdith = 640;
-  int bg_height = 640;
+  int bg_wdith = 640 * 3;
+  int bg_height = 640 * 3;
 
   Vector2 world_zero = screen_to_world_pos(state->camera, vector2_zero());
   printf("%.1f %.1f\n", world_zero.x, world_zero.y);
