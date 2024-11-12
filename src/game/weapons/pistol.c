@@ -4,7 +4,6 @@
 #include "game.h"
 #include "vector2.h"
 #include "weapon.h"
-#include <stdio.h>
 
 const float PISTOL_FIRE_RATE = 4.0f;
 
