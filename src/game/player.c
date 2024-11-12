@@ -58,12 +58,9 @@ static void player_update(GameState *state, void *context) {
     player->weapon = player->weapon_inv[1];
   }
 
-  if (movement.x != 0) {
-    player->look_dir.x = movement.x;
-  }
-  if (movement.y != 0) {
-    player->look_dir.y = movement.y;
-  }
+  player->look_dir = vector2_normalize(
+      vector2_sub(state->input->mouse_pos,
+                  world_to_screen_pos(state->camera, player->go->position)));
 
   player->weapon->go->position = player->go->position;
 
