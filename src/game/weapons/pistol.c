@@ -34,8 +34,6 @@ static void pistol_fire(GameState *state, void *context) {
       vector2_sub(state->input->mouse_pos,
                   world_to_screen_pos(state->camera, pistol->go->position)));
 
-  printf("%.2f %.2f\n", direction.x, direction.y);
-
   BasicBullet *bullet =
       bullet_new(state, pistol->go->position, direction, 5.0f);
 
