@@ -1,4 +1,5 @@
 #include "game.h"
+#include "camera.h"
 #include "go_pool.h"
 #include "vector2.h"
 #include <SDL2/SDL.h>
@@ -29,13 +30,15 @@ GameState *init_game() {
     return NULL;
   }
 
+  Camera *camera = camera_new((Vector2){SCREEN_WIDTH, SCREEN_HEIGHT});
+
   Time *time = time_new();
   Input *input = input_new();
   GOPool *go_pool = go_pool_new();
 
   GameState *state = malloc(sizeof(GameState));
 
-  *state = (GameState){window, renderer, 0, time, input, go_pool};
+  *state = (GameState){window, renderer, camera, 0, time, input, go_pool};
 
   return state;
 }

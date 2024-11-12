@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_video.h>
+#include "camera.h"
 #include "go_pool.h"
 #include "input.h"
 #include "time.h"
@@ -13,6 +14,7 @@
 typedef struct GameState {
   SDL_Window *window;
   SDL_Renderer *renderer;
+  Camera *camera;
   int quit;
   Time *time;
   Input *input;
