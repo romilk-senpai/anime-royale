@@ -5,11 +5,15 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_keycode.h>
 #include <SDL2/SDL_mouse.h>
+#include <SDL2/SDL_render.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-GameState *init_game() {
+const int LOGICAL_WIDTH = 1280;
+const int LOGICAL_HEIGHT = 720;
+
+GameState *init_game(int window_wdith, int window_height) {
   if (SDL_Init(SDL_INIT_VIDEO) < 0) {
     printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
     return NULL;
@@ -17,7 +21,7 @@ GameState *init_game() {
 
   SDL_Window *window = SDL_CreateWindow(
       "2D Shooter Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-      SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+      window_wdith, window_height, SDL_WINDOW_SHOWN);
   if (window == NULL) {
     printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
     return NULL;
@@ -30,7 +34,9 @@ GameState *init_game() {
     return NULL;
   }
 
-  Camera *camera = camera_new((Vector2){SCREEN_WIDTH, SCREEN_HEIGHT});
+  SDL_RenderSetLogicalSize(renderer, window_wdith, window_height);
+
+  Camera *camera = camera_new((Vector2){window_wdith, window_height});
 
   Time *time = time_new();
   Input *input = input_new();

@@ -8,9 +8,6 @@
 #include "input.h"
 #include "time.h"
 
-#define SCREEN_WIDTH 800
-#define SCREEN_HEIGHT 600
-
 typedef struct GameState {
   SDL_Window *window;
   SDL_Renderer *renderer;
@@ -21,7 +18,7 @@ typedef struct GameState {
   GOPool *go_pool;
 } GameState;
 
-GameState *init_game();
+GameState *init_game(int window_width, int window_height);
 void game_run(GameState *state);
 void handle_time(GameState *state);
 void process_input(GameState *state);
