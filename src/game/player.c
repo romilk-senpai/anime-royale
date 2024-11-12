@@ -3,6 +3,8 @@
 #include "weapons/pistol.h"
 #include "weapons/shotgun.h"
 #include "weapons/weapon.h"
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_rect.h>
 #include <SDL2/SDL_render.h>
 #include <game.h>
 #include <gameobject.h>
@@ -20,11 +22,23 @@ Player *player_new(GameState *state) {
   Shotgun *shotgun = shotgun_new(state);
 
   player->weapon_inv = malloc(sizeof(Weapon) * 4);
-
   player->weapon_inv[0] = pistol->weapon;
   player->weapon_inv[1] = shotgun->weapon;
 
   player->weapon = player->weapon_inv[0];
+
+  SDL_Surface *c_f_surf = IMG_Load("assets/c_front.png");
+  SDL_Surface *h_f_surf = IMG_Load("assets/h_front.png");
+  SDL_Surface *c_b_surf = IMG_Load("assets/c_back.png");
+  SDL_Surface *h_b_surf = IMG_Load("assets/h_back.png");
+  player->c_f_tex = SDL_CreateTextureFromSurface(state->renderer, c_f_surf);
+  player->h_f_tex = SDL_CreateTextureFromSurface(state->renderer, h_f_surf);
+  player->c_b_tex = SDL_CreateTextureFromSurface(state->renderer, c_b_surf);
+  player->h_b_tex = SDL_CreateTextureFromSurface(state->renderer, h_b_surf);
+  SDL_FreeSurface(c_f_surf);
+  SDL_FreeSurface(h_f_surf);
+  SDL_FreeSurface(c_b_surf);
+  SDL_FreeSurface(h_b_surf);
 
   go_pool_bind(state->go_pool, go);
 
@@ -43,6 +57,13 @@ static void player_update(GameState *state, void *context) {
     player->weapon = player->weapon_inv[1];
   }
 
+  if (movement.x != 0) {
+    player->look_dir.x = movement.x;
+  }
+  if (movement.y != 0) {
+    player->look_dir.y = movement.y;
+  }
+
   player->weapon->go->position = player->go->position;
 
   if (state->input->fire == 1) {
@@ -54,17 +75,33 @@ static void player_update(GameState *state, void *context) {
 
 static void player_render(GameState *state, void *context) {
   Player *player = (Player *)context;
-  SDL_Rect rect;
-  rect.w = 50;
-  rect.h = 50;
+  SDL_Rect c_rect;
+  c_rect.w = 32 * 3;
+  c_rect.h = 34 * 3;
 
   Vector2 render_pos = world_to_screen_pos(
-      state->camera, (Vector2){player->go->position.x - rect.w / 2.0,
-                               player->go->position.y - rect.h / 2.0});
+      state->camera, (Vector2){player->go->position.x - c_rect.w / 2.0,
+                               player->go->position.y - c_rect.h / 2.0});
 
-  rect.x = render_pos.x;
-  rect.y = render_pos.y;
+  c_rect.x = render_pos.x;
+  c_rect.y = render_pos.y;
 
-  SDL_SetRenderDrawColor(state->renderer, 0, 255, 0, 255);
-  SDL_RenderFillRect(state->renderer, &rect);
+  SDL_Rect h_rect;
+
+  h_rect.w = 32 * 3;
+  h_rect.h = 34 * 3;
+
+  h_rect.x = render_pos.x;
+  h_rect.y = render_pos.y - 6 * 3;
+
+  SDL_RenderCopyEx(state->renderer,
+                   player->look_dir.y >= 0 ? player->c_f_tex : player->c_b_tex,
+                   NULL, &c_rect, 0.0f, NULL,
+                   player->look_dir.x >= 0 ? SDL_FLIP_NONE
+                                           : SDL_FLIP_HORIZONTAL);
+  SDL_RenderCopyEx(state->renderer,
+                   player->look_dir.y >= 0 ? player->h_f_tex : player->h_b_tex,
+                   NULL, &h_rect, 0.0f, NULL,
+                   player->look_dir.x >= 0 ? SDL_FLIP_NONE
+                                           : SDL_FLIP_HORIZONTAL);
 }

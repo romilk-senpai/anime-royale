@@ -6,8 +6,8 @@
 #include <game.h>
 
 typedef struct {
-	SDL_Texture *cursor_tex;
-	GameObject *go;
+  GameObject *go;
+  SDL_Texture *cursor_tex;
 } Cursor;
 
 Cursor *cursor_new(GameState *state);
