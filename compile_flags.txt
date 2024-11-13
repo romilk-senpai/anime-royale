@@ -1,4 +1,5 @@
 -Ilibrcds/include
 -Isrc/core
--I~/projects/emsdk/upstream/emscripten/system/include
+-I/home/animezaya/projects/emsdk/upstream/emscripten/cache/sysroot/include/emscripten/
+-I/home/animezaya/projects/emsdk/upstream/emscripten/system/include/
 -D__EMSCRIPTEN__
