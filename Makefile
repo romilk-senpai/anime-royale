@@ -2,12 +2,12 @@
 
 build-linux:
 	make clean-linux
-	cmake -S . -B build-linux/
+	/usr/bin/cmake -S . -B build-linux/
 	make -C build-linux/
 
 run-linux:
 	make build-linux
-	./build/anime-royale
+	./build-linux/anime-royale
 
 debug-linux:
 	make build-linux
@@ -18,8 +18,11 @@ clean-linux:
 
 build-wasm:
 	make clean-wasm
-	cmake -S . -B build-wasm/ -D CMAKE_BUILD_TYPE=Debug -DEMSCRIPTEN=ON
+	/usr/bin/cmake -S . -B build-wasm/ -DEMSCRIPTEN=ON
 	emmake make -C build-wasm/
 
 clean-wasm:
 	rm -r -d -f build-wasm/
+
+test-wasm:
+	emcc src/test/test.c -sUSE_SDL=2 -sEXPORTED_FUNCTIONS=['_main'] -sASYNCIFY -sEXPORT_NAME='Main' -sINVOKE_RUN=0 -sMODULARIZE=1 -sDISABLE_DEPRECATED_FIND_EVENT_TARGET_BEHAVIOR=0 -sEXPORTED_RUNTIME_METHODS=['callMain','ccall','cwrap'] -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=1 -sDISABLE_DEPRECATED_FIND_EVENT_TARGET_BEHAVIOR -D __EMSCRIPTEN__

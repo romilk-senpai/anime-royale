@@ -1,2 +1,4 @@
 -Ilibrcds/include
 -Isrc/core
+-I~/projects/emsdk/upstream/emscripten/system/include
+-D__EMSCRIPTEN__

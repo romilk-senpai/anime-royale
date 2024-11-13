@@ -32,14 +32,11 @@ static void bg_renderer_render(GameState *state, void *context) {
   int bg_height = 640 * 3;
 
   Vector2 world_zero = screen_to_world_pos(state->camera, vector2_zero());
-  printf("%.1f %.1f\n", world_zero.x, world_zero.y);
   Vector2 bg_offset = world_to_screen_pos(
       state->camera, (Vector2){floor(world_zero.x / bg_wdith) * bg_wdith,
                                floor(world_zero.y / bg_height) * bg_height});
   int render_x = bg_offset.x;
   int render_y = bg_offset.y;
-
-  printf("%d %d\n", render_x, render_y);
 
   while (render_x < state->camera->viewbox.x) {
     while (render_y < state->camera->viewbox.y) {
