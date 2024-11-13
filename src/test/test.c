@@ -1,6 +1,7 @@
 #define SDL_MAIN_HANDLED
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <SDL2/SDL_rect.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_video.h>
@@ -26,6 +27,8 @@ void run_main_loop() {
     emscripten_set_canvas_size(1280, 720);
 
     first_pass = false;
+
+    SDL_Surface *surface = IMG_Load("assets/bg_space.png");
   }
 
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);

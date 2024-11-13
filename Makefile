@@ -25,6 +25,6 @@ clean-wasm:
 	rm -r -d -f build-wasm/
 
 test-wasm:
-	emcc -o build-wasm-test/a.out.js src/test/test.c -sUSE_SDL=2 -sEXPORTED_FUNCTIONS=['_main'] -sASYNCIFY -sEXPORT_NAME='Main' -sINVOKE_RUN=0 -sMODULARIZE=1 -sDISABLE_DEPRECATED_FIND_EVENT_TARGET_BEHAVIOR=0 -sEXPORTED_RUNTIME_METHODS=['callMain','ccall','cwrap'] -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=1 -sDISABLE_DEPRECATED_FIND_EVENT_TARGET_BEHAVIOR -D __EMSCRIPTEN__
+	emcc -o build-wasm-test/a.out.js src/test/test.c -sUSE_SDL=2 -sEXPORTED_FUNCTIONS=['_main'] -sASYNCIFY -sEXPORT_NAME='Main' -sINVOKE_RUN=0 -sMODULARIZE=1 -sDISABLE_DEPRECATED_FIND_EVENT_TARGET_BEHAVIOR=0 -sEXPORTED_RUNTIME_METHODS=['callMain','ccall','cwrap'] -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=1 -sDISABLE_DEPRECATED_FIND_EVENT_TARGET_BEHAVIOR --use-port=sdl2_image:formats=png -D __EMSCRIPTEN__
 	cp src/test/index.html build-wasm-test/index.html
 

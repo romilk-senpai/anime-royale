@@ -27,12 +27,17 @@ if(EMSCRIPTEN)
     # include_directories("~/projects/emsdk/upstream/emscripten/system/include/SDL/")
     add_compile_definitions("__EMSCRIPTEN__")
     target_link_options(${PROJECT_NAME} PRIVATE
-        "-sWASM=1"
-        "-s ASSERTIONS=2"
+        "-sMODULARIZE=1"
+        "-sEXPORT_NAME='Main'"
+        "-sINVOKE_RUN=0"
+        "-sEXPORTED_FUNCTIONS=['_main']"
+        "-sEXPORTED_RUNTIME_METHODS=['callMain', 'ccall', 'cwrap']"
+        "-sFORCE_FILESYSTEM=1"
         "-sUSE_SDL=2"
-        "-sUSE_SDL_IMAGE=2"
         "-sALLOW_MEMORY_GROWTH=1"
-        "-O2"
+        "-sASYNCIFY"
+        "-sDISABLE_DEPRECATED_FIND_EVENT_TARGET_BEHAVIOR"
+        "--use-port=sdl2_image:formats=png"
     )
     add_custom_command(
         TARGET ${PROJECT_NAME} POST_BUILD
