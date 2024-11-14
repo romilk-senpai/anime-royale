@@ -12,6 +12,7 @@
 #include <SDL2/SDL_log.h>
 #include <SDL2/SDL_mouse.h>
 #include <SDL2/SDL_render.h>
+#include <SDL2/SDL_ttf.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -52,6 +53,9 @@ void init_window(GameState *state, int window_width, int window_height) {
       SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 #endif
   SDL_RenderSetLogicalSize(renderer, LOGICAL_WIDTH, LOGICAL_HEIGHT);
+
+  TTF_Init();
+  IMG_Init(IMG_INIT_PNG);
 
   state->window = window;
   state->renderer = renderer;
