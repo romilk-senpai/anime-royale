@@ -36,7 +36,7 @@ GameState *init_game(GameController *game_controller) {
 
 void init_window(GameState *state, int window_width, int window_height) {
   SDL_Init(SDL_INIT_VIDEO);
-  SDL_Window *window = SDL_CreateWindow("2D Shooter Game", 0, 0, window_width,
+  SDL_Window *window = SDL_CreateWindow("Anime Royale", 0, 0, window_width,
                                         window_height, SDL_WINDOW_SHOWN);
 
 #ifdef __EMSCRIPTEN__
