@@ -1,4 +1,0 @@
-/home/runner/work/anime-royale/anime-royale/build-wasm/CMakeFiles/core.dir
-/home/runner/work/anime-royale/anime-royale/build-wasm/CMakeFiles/anime-royale.dir
-/home/runner/work/anime-royale/anime-royale/build-wasm/CMakeFiles/edit_cache.dir
-/home/runner/work/anime-royale/anime-royale/build-wasm/CMakeFiles/rebuild_cache.dir

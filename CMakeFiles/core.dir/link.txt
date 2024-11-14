@@ -1,2 +1,0 @@
-/usr/bin/ar qc libcore.a CMakeFiles/core.dir/src/core/camera.c.o CMakeFiles/core.dir/src/core/game.c.o CMakeFiles/core.dir/src/core/gameobject.c.o CMakeFiles/core.dir/src/core/go_min_heap.c.o CMakeFiles/core.dir/src/core/go_pool.c.o CMakeFiles/core.dir/src/core/input.c.o CMakeFiles/core.dir/src/core/time.c.o CMakeFiles/core.dir/src/core/vector2.c.o
-/usr/bin/ranlib libcore.a
