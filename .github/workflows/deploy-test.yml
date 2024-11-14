@@ -39,7 +39,9 @@ jobs:
           cp -r rcds/librcds-wasm .
 
       - name: Build anime-royale
-        run: make build-wasm
+        run: |
+          make build-wasm-test
+          make build-wasm
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
