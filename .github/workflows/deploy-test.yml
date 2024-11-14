@@ -13,12 +13,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y cmake libsdl2-dev libsdl2-image-dev
-          
+
       - name: Setup cache
         id: cache-system-libraries
         uses: actions/cache@v4
@@ -29,6 +24,11 @@ jobs:
         with:
           version: ${{env.EM_VERSION}}
           actions-cache-folder: ${{env.EM_CACHE_FOLDER}}
+      
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake libsdl2-dev libsdl2-image-dev
 
       - name: Build rcds
         run: |
