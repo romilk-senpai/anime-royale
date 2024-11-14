@@ -25,7 +25,7 @@ jobs:
           cd rcds
           make static-wasm
           cd ..
-          cp -r rcds/librcds .
+          cp -r rcds/librcds-wasm .
 
       - name: Build anime-royale
         run: make build-wasm
