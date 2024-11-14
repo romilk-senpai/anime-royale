@@ -1,4 +1,5 @@
 #include "bg_renderer.h"
+#include "../sdl_helper.h"
 #include "camera.h"
 #include "gameobject.h"
 #include "go_pool.h"
@@ -15,9 +16,8 @@ BGRenderer *bg_renderer_new(GameState *state) {
   bg_renderer->go = go;
   go->z_index = 0;
 
-  SDL_Surface *surface = IMG_Load("assets/bg_space.png");
-  bg_renderer->bg_tex = SDL_CreateTextureFromSurface(state->renderer, surface);
-  SDL_FreeSurface(surface);
+  bg_renderer->bg_tex =
+      create_sdl_texture(state->renderer, "assets/bg_space.png");
 
   go_pool_bind(state->go_pool, go);
 

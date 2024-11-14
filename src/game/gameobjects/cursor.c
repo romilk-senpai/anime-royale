@@ -4,6 +4,7 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_surface.h>
+#include "../sdl_helper.h"
 
 Cursor *cursor_new(GameState *state) {
   Cursor *cursor = malloc(sizeof(Cursor));
@@ -13,9 +14,7 @@ Cursor *cursor_new(GameState *state) {
   cursor->go = go;
   go->z_index = 100;
 
-  SDL_Surface *surface = IMG_Load("assets/cursor.png");
-  cursor->cursor_tex = SDL_CreateTextureFromSurface(state->renderer, surface);
-  SDL_FreeSurface(surface);
+  cursor->cursor_tex = create_sdl_texture(state->renderer, "assets/cursor.png");
 
   go_pool_bind(state->go_pool, go);
 

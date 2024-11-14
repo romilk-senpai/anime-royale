@@ -1,4 +1,5 @@
 #include "player.h"
+#include "../sdl_helper.h"
 #include "camera.h"
 #include "weapons/pistol.h"
 #include "weapons/shotgun.h"
@@ -29,19 +30,10 @@ Player *player_new(GameState *state) {
 
   player->weapon = player->weapon_inv[0];
 
-  SDL_Surface *c_f_surf = IMG_Load("assets/c_front.png");
-  SDL_Surface *h_f_surf = IMG_Load("assets/h_front.png");
-  SDL_Surface *c_b_surf = IMG_Load("assets/c_back.png");
-  SDL_Surface *h_b_surf = IMG_Load("assets/h_back.png");
-  player->c_f_tex = SDL_CreateTextureFromSurface(state->renderer, c_f_surf);
-  player->h_f_tex = SDL_CreateTextureFromSurface(state->renderer, h_f_surf);
-  player->c_b_tex = SDL_CreateTextureFromSurface(state->renderer, c_b_surf);
-  player->h_b_tex = SDL_CreateTextureFromSurface(state->renderer, h_b_surf);
-  SDL_FreeSurface(c_f_surf);
-  SDL_FreeSurface(h_f_surf);
-  SDL_FreeSurface(c_b_surf);
-  SDL_FreeSurface(h_b_surf);
-
+  player->c_f_tex = create_sdl_texture(state->renderer, "assets/c_front.png");
+  player->h_f_tex = create_sdl_texture(state->renderer, "assets/h_front.png");
+  player->c_b_tex = create_sdl_texture(state->renderer, "assets/c_back.png");
+  player->h_b_tex = create_sdl_texture(state->renderer, "assets/h_back.png");
   go_pool_bind(state->go_pool, go);
 
   return player;
