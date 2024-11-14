@@ -48,6 +48,7 @@ build-wasm-test:
 	-sDISABLE_DEPRECATED_FIND_EVENT_TARGET_BEHAVIOR \
 	--use-port=sdl2 \
 	--use-port=sdl2_image:formats=png \
+	--use-port=sdl2_ttf \
 	-D __EMSCRIPTEN__
 	cp src/test/index.html build-wasm-test/index.html
 

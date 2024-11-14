@@ -40,6 +40,7 @@ if(EMSCRIPTEN)
         # "-sFORCE_FILESYSTEM=1"
         "--use-port=sdl2"
         "--use-port=sdl2_image:formats=png"
+        "--use-port=sdl2_ttf"
         # "-sALLOW_MEMORY_GROWTH=1"
         # "-sASYNCIFY"
         # "-sDISABLE_DEPRECATED_FIND_EVENT_TARGET_BEHAVIOR=1"
@@ -49,5 +50,5 @@ if(EMSCRIPTEN)
     target_link_libraries(${PROJECT_NAME} core rcds)
 else()
     target_link_libraries(core rcds)
-    target_link_libraries(${PROJECT_NAME} core SDL2 SDL2_image m rcds)
+    target_link_libraries(${PROJECT_NAME} core SDL2 SDL2_image SDL2_ttf m rcds)
 endif()
