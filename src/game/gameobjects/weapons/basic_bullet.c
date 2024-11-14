@@ -1,4 +1,5 @@
 #include "basic_bullet.h"
+#include <SDL2/SDL_stdinc.h>
 #include <vector2.h>
 
 const float BASIC_BULLET_SPEED = 1000.0f;
@@ -11,6 +12,7 @@ BasicBullet *bullet_new(GameState *state, Vector2 position, Vector2 direction,
                              update, render);
   go->position = position;
   go->z_index = 15;
+  SDL_log(go->z_index);
 
   bullet->go = go;
   bullet->direction = direction;
