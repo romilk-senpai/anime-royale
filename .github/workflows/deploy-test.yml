@@ -1,0 +1,38 @@
+name: Build and Deploy
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake libsdl2-dev libsdl2-image-dev
+          
+      - uses: mymindstorm/setup-emsdk@v14
+      - name: Verify
+        run: emcc -v
+
+      - name: Build rcds
+        run: |
+          git clone https://github.com/romilk-senpai/rcds.git
+          cd rcds
+          make static-wasm
+          cd ..
+          cp -r rcds/librcds .
+
+      - name: Build anime-royale
+        run: make build-wasm
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        if: github.ref == 'refs/heads/master'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build-wasm
