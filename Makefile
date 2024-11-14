@@ -36,6 +36,7 @@ build-wasm-test:
 	mkdir -p build-wasm-test/
 	emcc -o build-wasm-test/a.out.js \
 	src/test/test.c \
+	-sWASM=1 \
 	-sEXPORTED_FUNCTIONS=['_main'] \
 	-sASYNCIFY \
 	-sEXPORT_NAME='Main' \
