@@ -20,6 +20,8 @@ build-wasm:
 	make clean-wasm
 	/usr/bin/cmake -S . -B build-wasm/ -DEMSCRIPTEN=ON
 	emmake make -C build-wasm/
+	cp html/* build-wasm/
+	mv build-wasm/anime-royale build-wasm/anime-royale.js
 
 clean-wasm:
 	rm -r -d -f build-wasm/

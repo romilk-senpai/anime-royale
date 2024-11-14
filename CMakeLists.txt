@@ -45,10 +45,10 @@ if(EMSCRIPTEN)
     add_custom_command(
         TARGET ${PROJECT_NAME} POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_SOURCE_DIR}/html/index.html
-                ${CMAKE_BINARY_DIR}/html/index.html
+                ${CMAKE_SOURCE_DIR}/html/*
+                ${CMAKE_BINARY_DIR}/
         )
-    target_link_libraries(${PROJECT_NAME} core m rcds)
+    target_link_libraries(${PROJECT_NAME} core rcds)
 else()
     target_link_libraries(core rcds)
     target_link_libraries(${PROJECT_NAME} core SDL2 SDL2_image m rcds)
