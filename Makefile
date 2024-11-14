@@ -18,10 +18,11 @@ clean-linux:
 
 build-wasm:
 	make clean-wasm
-	/usr/bin/cmake -S . -B build-wasm/ -DEMSCRIPTEN=ON
-	emmake make -C build-wasm/
+	mkdir build-wasm/
 	cp html/* build-wasm/
 	cp -r assets build-wasm/
+	/usr/bin/cmake -S . -B build-wasm/ -DEMSCRIPTEN=ON
+	emmake make -C build-wasm/
 	mv build-wasm/anime-royale build-wasm/anime-royale.js
 
 run-wasm:
@@ -32,6 +33,20 @@ clean-wasm:
 	rm -r -d -f build-wasm/
 
 build-wasm-test:
-	emcc -o build-wasm-test/a.out.js src/test/test.c -sUSE_SDL=2 -sEXPORTED_FUNCTIONS=['_main'] -sASYNCIFY -sEXPORT_NAME='Main' -sINVOKE_RUN=0 -sMODULARIZE=1 -sDISABLE_DEPRECATED_FIND_EVENT_TARGET_BEHAVIOR=0 -sEXPORTED_RUNTIME_METHODS=['callMain','ccall','cwrap'] -sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=1 -sDISABLE_DEPRECATED_FIND_EVENT_TARGET_BEHAVIOR --use-port=sdl2_image:formats=png -D __EMSCRIPTEN__ -sSDL2_IMAGE_FORMATS="[png]"
+	emcc -o build-wasm-test/a.out.js \
+	src/test/test.c \
+	-sUSE_SDL=2 \
+	-sEXPORTED_FUNCTIONS=['_main'] \
+	-sASYNCIFY \
+	-sEXPORT_NAME='Main' \
+	-sINVOKE_RUN=0 \
+	-sMODULARIZE=1 \
+	-sDISABLE_DEPRECATED_FIND_EVENT_TARGET_BEHAVIOR=0 \
+	-sEXPORTED_RUNTIME_METHODS=['callMain','ccall','cwrap'] \
+	-sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=1 \
+	-sDISABLE_DEPRECATED_FIND_EVENT_TARGET_BEHAVIOR \
+	--use-port=sdl2_image:formats=png \
+	-D __EMSCRIPTEN__ \
+	-sSDL2_IMAGE_FORMATS="[png]"
 	cp src/test/index.html build-wasm-test/index.html
 

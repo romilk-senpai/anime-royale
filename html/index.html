@@ -12,31 +12,17 @@
 			width: 100%;
 			height: 100%;
 		}
-
-		.container {
-			width: 100%;
-			height: 100%;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-		}
 	</style>
 </head>
 
 <body>
-	<div class="container">
-		<canvas id="_canvas" oncontextmenu="event.preventDefault()" tabindex="-1"></canvas>
-	</div>
-	<script src="anime-royale.js"></script> <!-- Script Name -->
+	<canvas id="canvas" oncontextmenu="event.preventDefault()"></canvas>
 	<script type='text/javascript'>
-		let Module;
-		Main({
-			canvas: (() => document.getElementById('_canvas'))()
-		}).then((m) => {
-			Module = m;
-			m.callMain();
-		});
+		var Module = {
+			canvas: (function () {return document.getElementById('canvas');})()
+		};
 	</script>
+	<script src="anime-royale.js"></script>
 </body>
 
 </html>

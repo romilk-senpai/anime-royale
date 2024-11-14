@@ -30,24 +30,23 @@ if(EMSCRIPTEN)
     set(CMAKE_C_COMPILER emcc)
     add_compile_definitions("__EMSCRIPTEN__")
     target_link_options(${PROJECT_NAME} PRIVATE
-        "--bind"
+        # "--bind"
         "-sWASM=1"
-        "-sMODULARIZE=1"
-        "-sEXPORT_NAME='Main'"
-        "-sINVOKE_RUN=0"
-        "-sEXPORTED_FUNCTIONS=['_main']"
-        "-sEXPORTED_RUNTIME_METHODS=['callMain', 'ccall', 'cwrap']"
-        "-sFORCE_FILESYSTEM=1"
+        # "-sMODULARIZE=1"
+        # "-sEXPORT_NAME='Main'"
+        # "-sINVOKE_RUN=0"
+        # "-sEXPORTED_FUNCTIONS=['_main']"
+        # "-sEXPORTED_RUNTIME_METHODS=['callMain', 'ccall', 'cwrap']"
+        # "-sFORCE_FILESYSTEM=1"
         "-sUSE_SDL=2"
         "-sUSE_SDL_IMAGE=2"
-        "-sSDL2_IMAGE_FORMATS=['png']"
-        "-sALLOW_MEMORY_GROWTH=1"
-        "-sASYNCIFY"
-        "-sDISABLE_DEPRECATED_FIND_EVENT_TARGET_BEHAVIOR=1"
-        "--preload-file assets/"
-        "--use-preload-plugins"
+        "-sSDL2_IMAGE_FORMATS=['png', 'jpg']"
+        # "-sALLOW_MEMORY_GROWTH=1"
+        # "-sASYNCIFY"
+        # "-sDISABLE_DEPRECATED_FIND_EVENT_TARGET_BEHAVIOR=1"
         # "-O2"
     )
+    target_link_options(${PROJECT_NAME} PRIVATE --preload-file assets)
     target_link_libraries(${PROJECT_NAME} core rcds)
 else()
     target_link_libraries(core rcds)
