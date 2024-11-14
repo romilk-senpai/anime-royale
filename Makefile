@@ -35,7 +35,6 @@ clean-wasm:
 build-wasm-test:
 	emcc -o build-wasm-test/a.out.js \
 	src/test/test.c \
-	-sUSE_SDL=2 \
 	-sEXPORTED_FUNCTIONS=['_main'] \
 	-sASYNCIFY \
 	-sEXPORT_NAME='Main' \
@@ -45,6 +44,7 @@ build-wasm-test:
 	-sEXPORTED_RUNTIME_METHODS=['callMain','ccall','cwrap'] \
 	-sFORCE_FILESYSTEM=1 -sALLOW_MEMORY_GROWTH=1 \
 	-sDISABLE_DEPRECATED_FIND_EVENT_TARGET_BEHAVIOR \
+	--use-port=sdl2 \
 	--use-port=sdl2_image:formats=png \
 	-D __EMSCRIPTEN__ \
 	-sSDL2_IMAGE_FORMATS="[png]"
