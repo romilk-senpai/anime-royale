@@ -11,6 +11,7 @@ Cursor *cursor_new(GameState *state) {
   GameObject *go = go_create(go_pool_new_id(state->go_pool), cursor,
                              update, render);
   cursor->go = go;
+  go->z_index = 100;
 
   SDL_Surface *surface = IMG_Load("assets/cursor.png");
   cursor->cursor_tex = SDL_CreateTextureFromSurface(state->renderer, surface);

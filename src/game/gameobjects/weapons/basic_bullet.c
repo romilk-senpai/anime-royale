@@ -10,6 +10,7 @@ BasicBullet *bullet_new(GameState *state, Vector2 position, Vector2 direction,
   GameObject *go = go_create(go_pool_new_id(state->go_pool), bullet,
                              update, render);
   go->position = position;
+  go->z_index = 15;
 
   bullet->go = go;
   bullet->direction = direction;

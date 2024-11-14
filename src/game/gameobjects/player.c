@@ -18,6 +18,7 @@ Player *player_new(GameState *state) {
   GameObject *go =
       go_create(go_pool_new_id(state->go_pool), player, update, render);
   player->go = go;
+  go->z_index = 10;
 
   Pistol *pistol = pistol_new(state);
   Shotgun *shotgun = shotgun_new(state);

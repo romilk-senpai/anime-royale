@@ -13,6 +13,7 @@ BGRenderer *bg_renderer_new(GameState *state) {
   GameObject *go =
       go_create(go_pool_new_id(state->go_pool), bg_renderer, update, render);
   bg_renderer->go = go;
+  go->z_index = 0;
 
   SDL_Surface *surface = IMG_Load("assets/bg_space.png");
   bg_renderer->bg_tex = SDL_CreateTextureFromSurface(state->renderer, surface);

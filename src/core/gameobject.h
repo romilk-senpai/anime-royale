@@ -16,6 +16,7 @@ typedef struct {
   float angle;
   update_func update;
   render_func render;
+  int z_index;
 } GameObject;
 
 GameObject *go_create(uint32_t instance_id, void *binding, update_func update,

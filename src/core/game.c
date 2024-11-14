@@ -1,6 +1,10 @@
 #include "game.h"
 #include "camera.h"
+#include "gameobject.h"
+#include "go_min_heap.h"
 #include "go_pool.h"
+#include "map.h"
+#include "vector.h"
 #include "vector2.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -173,11 +177,25 @@ void render_go_map(key_value_pair *kvp, void *context) {
   go->render(state, go->binding);
 }
 
+void render_create_min_heap(key_value_pair *kvp, void *context) {
+  min_heap *heap = (min_heap *)context;
+  min_heap_insert(heap, (GameObject *)kvp->value);
+}
+
 void render_game(GameState *state) {
   SDL_SetRenderDrawColor(state->renderer, 0, 0, 0, 255);
   SDL_RenderClear(state->renderer);
 
-  hash_map_for_each(state->go_pool->go_map, render_go_map, state);
+  // hash_map_for_each(state->go_pool->go_map, render_go_map, state);
+
+  min_heap *heap = min_heap_new_cap(state->go_pool->go_map->size);
+  hash_map_for_each(state->go_pool->go_map, render_create_min_heap, heap);
+  for (size_t i = 0; i < heap->v->size; i++) {
+    GameObject *go = vector_get(heap->v, GameObject *, i);
+    go->render(state, go->binding);
+  }
+
+  min_heap_free(heap);
 
   SDL_RenderPresent(state->renderer);
 }
