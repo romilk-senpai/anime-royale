@@ -214,6 +214,30 @@ src/core/gameobject.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/core/gameobject.c.s
 .PHONY : src/core/gameobject.c.s
 
+src/core/go_min_heap.o: src/core/go_min_heap.c.o
+.PHONY : src/core/go_min_heap.o
+
+# target to build an object file
+src/core/go_min_heap.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/core/go_min_heap.c.o
+.PHONY : src/core/go_min_heap.c.o
+
+src/core/go_min_heap.i: src/core/go_min_heap.c.i
+.PHONY : src/core/go_min_heap.i
+
+# target to preprocess a source file
+src/core/go_min_heap.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/core/go_min_heap.c.i
+.PHONY : src/core/go_min_heap.c.i
+
+src/core/go_min_heap.s: src/core/go_min_heap.c.s
+.PHONY : src/core/go_min_heap.s
+
+# target to generate assembly for a file
+src/core/go_min_heap.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/core/go_min_heap.c.s
+.PHONY : src/core/go_min_heap.c.s
+
 src/core/go_pool.o: src/core/go_pool.c.o
 .PHONY : src/core/go_pool.o
 
@@ -569,6 +593,9 @@ help:
 	@echo "... src/core/gameobject.o"
 	@echo "... src/core/gameobject.i"
 	@echo "... src/core/gameobject.s"
+	@echo "... src/core/go_min_heap.o"
+	@echo "... src/core/go_min_heap.i"
+	@echo "... src/core/go_min_heap.s"
 	@echo "... src/core/go_pool.o"
 	@echo "... src/core/go_pool.i"
 	@echo "... src/core/go_pool.s"

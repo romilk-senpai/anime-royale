@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/core.dir/src/core/game.c.o.d"
   "CMakeFiles/core.dir/src/core/gameobject.c.o"
   "CMakeFiles/core.dir/src/core/gameobject.c.o.d"
+  "CMakeFiles/core.dir/src/core/go_min_heap.c.o"
+  "CMakeFiles/core.dir/src/core/go_min_heap.c.o.d"
   "CMakeFiles/core.dir/src/core/go_pool.c.o"
   "CMakeFiles/core.dir/src/core/go_pool.c.o.d"
   "CMakeFiles/core.dir/src/core/input.c.o"

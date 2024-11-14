@@ -111,10 +111,24 @@ CMakeFiles/core.dir/src/core/gameobject.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/core.dir/src/core/gameobject.c.s"
 	emcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/runner/work/anime-royale/anime-royale/src/core/gameobject.c -o CMakeFiles/core.dir/src/core/gameobject.c.s
 
+CMakeFiles/core.dir/src/core/go_min_heap.c.o: CMakeFiles/core.dir/flags.make
+CMakeFiles/core.dir/src/core/go_min_heap.c.o: ../src/core/go_min_heap.c
+CMakeFiles/core.dir/src/core/go_min_heap.c.o: CMakeFiles/core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/runner/work/anime-royale/anime-royale/build-wasm/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/core.dir/src/core/go_min_heap.c.o"
+	emcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/core.dir/src/core/go_min_heap.c.o -MF CMakeFiles/core.dir/src/core/go_min_heap.c.o.d -o CMakeFiles/core.dir/src/core/go_min_heap.c.o -c /home/runner/work/anime-royale/anime-royale/src/core/go_min_heap.c
+
+CMakeFiles/core.dir/src/core/go_min_heap.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/core.dir/src/core/go_min_heap.c.i"
+	emcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/runner/work/anime-royale/anime-royale/src/core/go_min_heap.c > CMakeFiles/core.dir/src/core/go_min_heap.c.i
+
+CMakeFiles/core.dir/src/core/go_min_heap.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/core.dir/src/core/go_min_heap.c.s"
+	emcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/runner/work/anime-royale/anime-royale/src/core/go_min_heap.c -o CMakeFiles/core.dir/src/core/go_min_heap.c.s
+
 CMakeFiles/core.dir/src/core/go_pool.c.o: CMakeFiles/core.dir/flags.make
 CMakeFiles/core.dir/src/core/go_pool.c.o: ../src/core/go_pool.c
 CMakeFiles/core.dir/src/core/go_pool.c.o: CMakeFiles/core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/runner/work/anime-royale/anime-royale/build-wasm/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/core.dir/src/core/go_pool.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/runner/work/anime-royale/anime-royale/build-wasm/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/core.dir/src/core/go_pool.c.o"
 	emcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/core.dir/src/core/go_pool.c.o -MF CMakeFiles/core.dir/src/core/go_pool.c.o.d -o CMakeFiles/core.dir/src/core/go_pool.c.o -c /home/runner/work/anime-royale/anime-royale/src/core/go_pool.c
 
 CMakeFiles/core.dir/src/core/go_pool.c.i: cmake_force
@@ -128,7 +142,7 @@ CMakeFiles/core.dir/src/core/go_pool.c.s: cmake_force
 CMakeFiles/core.dir/src/core/input.c.o: CMakeFiles/core.dir/flags.make
 CMakeFiles/core.dir/src/core/input.c.o: ../src/core/input.c
 CMakeFiles/core.dir/src/core/input.c.o: CMakeFiles/core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/runner/work/anime-royale/anime-royale/build-wasm/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/core.dir/src/core/input.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/runner/work/anime-royale/anime-royale/build-wasm/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/core.dir/src/core/input.c.o"
 	emcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/core.dir/src/core/input.c.o -MF CMakeFiles/core.dir/src/core/input.c.o.d -o CMakeFiles/core.dir/src/core/input.c.o -c /home/runner/work/anime-royale/anime-royale/src/core/input.c
 
 CMakeFiles/core.dir/src/core/input.c.i: cmake_force
@@ -142,7 +156,7 @@ CMakeFiles/core.dir/src/core/input.c.s: cmake_force
 CMakeFiles/core.dir/src/core/time.c.o: CMakeFiles/core.dir/flags.make
 CMakeFiles/core.dir/src/core/time.c.o: ../src/core/time.c
 CMakeFiles/core.dir/src/core/time.c.o: CMakeFiles/core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/runner/work/anime-royale/anime-royale/build-wasm/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/core.dir/src/core/time.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/runner/work/anime-royale/anime-royale/build-wasm/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/core.dir/src/core/time.c.o"
 	emcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/core.dir/src/core/time.c.o -MF CMakeFiles/core.dir/src/core/time.c.o.d -o CMakeFiles/core.dir/src/core/time.c.o -c /home/runner/work/anime-royale/anime-royale/src/core/time.c
 
 CMakeFiles/core.dir/src/core/time.c.i: cmake_force
@@ -156,7 +170,7 @@ CMakeFiles/core.dir/src/core/time.c.s: cmake_force
 CMakeFiles/core.dir/src/core/vector2.c.o: CMakeFiles/core.dir/flags.make
 CMakeFiles/core.dir/src/core/vector2.c.o: ../src/core/vector2.c
 CMakeFiles/core.dir/src/core/vector2.c.o: CMakeFiles/core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/runner/work/anime-royale/anime-royale/build-wasm/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/core.dir/src/core/vector2.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/runner/work/anime-royale/anime-royale/build-wasm/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/core.dir/src/core/vector2.c.o"
 	emcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/core.dir/src/core/vector2.c.o -MF CMakeFiles/core.dir/src/core/vector2.c.o.d -o CMakeFiles/core.dir/src/core/vector2.c.o -c /home/runner/work/anime-royale/anime-royale/src/core/vector2.c
 
 CMakeFiles/core.dir/src/core/vector2.c.i: cmake_force
@@ -172,6 +186,7 @@ core_OBJECTS = \
 "CMakeFiles/core.dir/src/core/camera.c.o" \
 "CMakeFiles/core.dir/src/core/game.c.o" \
 "CMakeFiles/core.dir/src/core/gameobject.c.o" \
+"CMakeFiles/core.dir/src/core/go_min_heap.c.o" \
 "CMakeFiles/core.dir/src/core/go_pool.c.o" \
 "CMakeFiles/core.dir/src/core/input.c.o" \
 "CMakeFiles/core.dir/src/core/time.c.o" \
@@ -183,13 +198,14 @@ core_EXTERNAL_OBJECTS =
 libcore.a: CMakeFiles/core.dir/src/core/camera.c.o
 libcore.a: CMakeFiles/core.dir/src/core/game.c.o
 libcore.a: CMakeFiles/core.dir/src/core/gameobject.c.o
+libcore.a: CMakeFiles/core.dir/src/core/go_min_heap.c.o
 libcore.a: CMakeFiles/core.dir/src/core/go_pool.c.o
 libcore.a: CMakeFiles/core.dir/src/core/input.c.o
 libcore.a: CMakeFiles/core.dir/src/core/time.c.o
 libcore.a: CMakeFiles/core.dir/src/core/vector2.c.o
 libcore.a: CMakeFiles/core.dir/build.make
 libcore.a: CMakeFiles/core.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/runner/work/anime-royale/anime-royale/build-wasm/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking C static library libcore.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/runner/work/anime-royale/anime-royale/build-wasm/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking C static library libcore.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/core.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/core.dir/link.txt --verbose=$(VERBOSE)
 
