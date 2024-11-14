@@ -4,6 +4,7 @@
 #include "gameobjects/bg_renderer.h"
 #include "gameobjects/cursor.h"
 #include "gameobjects/player.h"
+#include "gameobjects/ui/main_menu.h"
 #include <stdlib.h>
 
 ARController *ar_controller_new() {
@@ -20,9 +21,10 @@ ARController *ar_controller_new() {
 }
 
 static void start(GameState *state, void *context) {
-  Player *player = player_new(state);
-  Cursor *cursor = cursor_new(state);
-  BGRenderer *renderer = bg_renderer_new(state);
+  // Player *player = player_new(state);
+  // Cursor *cursor = cursor_new(state);
+  // BGRenderer *renderer = bg_renderer_new(state);
+  MainMenu *main_menu = main_menu_create(state);
 }
 
 static void before_update(GameState *state, void *context) {}
