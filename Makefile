@@ -19,7 +19,7 @@ clean-linux:
 build-wasm:
 	make clean-wasm
 	mkdir -p build-wasm/
-	cp html/* build-wasm/
+	cp -r html/* build-wasm/
 	cp -r assets build-wasm/
 	/usr/bin/cmake -S . -B build-wasm/ -DEMSCRIPTEN=ON
 	emmake make -C build-wasm/
