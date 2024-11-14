@@ -15,11 +15,6 @@ BGRenderer *bg_renderer_new(GameState *state) {
   bg_renderer->go = go;
 
   SDL_Surface *surface = IMG_Load("assets/bg_space.png");
-  if (!surface) {
-    SDL_Log("Failed to load image: %s", IMG_GetError());
-  } else {
-    SDL_Log("Image loaded successfully");
-  }
   bg_renderer->bg_tex = SDL_CreateTextureFromSurface(state->renderer, surface);
   SDL_FreeSurface(surface);
 
