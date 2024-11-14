@@ -18,7 +18,7 @@ clean-linux:
 
 build-wasm:
 	make clean-wasm
-	mkdir build-wasm/
+	mkdir -p build-wasm/
 	cp html/* build-wasm/
 	cp -r assets build-wasm/
 	/usr/bin/cmake -S . -B build-wasm/ -DEMSCRIPTEN=ON
@@ -33,6 +33,7 @@ clean-wasm:
 	rm -r -d -f build-wasm/
 
 build-wasm-test:
+	mkdir -p build-wasm-test/
 	emcc -o build-wasm-test/a.out.js \
 	src/test/test.c \
 	-sEXPORTED_FUNCTIONS=['_main'] \
@@ -46,7 +47,6 @@ build-wasm-test:
 	-sDISABLE_DEPRECATED_FIND_EVENT_TARGET_BEHAVIOR \
 	--use-port=sdl2 \
 	--use-port=sdl2_image:formats=png \
-	-D __EMSCRIPTEN__ \
-	-sSDL2_IMAGE_FORMATS="[png]"
+	-D __EMSCRIPTEN__
 	cp src/test/index.html build-wasm-test/index.html
 
