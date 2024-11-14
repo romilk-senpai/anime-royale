@@ -9,7 +9,7 @@ Cursor *cursor_new(GameState *state) {
   Cursor *cursor = malloc(sizeof(Cursor));
 
   GameObject *go = go_create(go_pool_new_id(state->go_pool), cursor,
-                             cursor_update, cursor_render);
+                             update, render);
   cursor->go = go;
 
   SDL_Surface *surface = IMG_Load("assets/cursor.png");
@@ -21,12 +21,12 @@ Cursor *cursor_new(GameState *state) {
   return cursor;
 }
 
-static void cursor_update(GameState *state, void *context) {
+static void update(GameState *state, void *context) {
   Cursor *c = (Cursor *)context;
   c->go->position = state->input->mouse_pos;
 }
 
-static void cursor_render(GameState *state, void *context) {
+static void render(GameState *state, void *context) {
   Cursor *cursor = (Cursor *)context;
   SDL_Rect rect;
   rect.w = 50;

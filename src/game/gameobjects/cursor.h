@@ -11,7 +11,7 @@ typedef struct {
 } Cursor;
 
 Cursor *cursor_new(GameState *state);
-static void cursor_update(GameState *state, void *context);
-static void cursor_render(GameState *state, void *context);
+static void update(GameState *state, void *context);
+static void render(GameState *state, void *context);
 
 #endif

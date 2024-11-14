@@ -10,11 +10,16 @@
 BGRenderer *bg_renderer_new(GameState *state) {
   BGRenderer *bg_renderer = malloc(sizeof(BGRenderer));
 
-  GameObject *go = go_create(go_pool_new_id(state->go_pool), bg_renderer,
-                             bg_renderer_update, bg_renderer_render);
+  GameObject *go =
+      go_create(go_pool_new_id(state->go_pool), bg_renderer, update, render);
   bg_renderer->go = go;
 
   SDL_Surface *surface = IMG_Load("assets/bg_space.png");
+  if (!surface) {
+    SDL_Log("Failed to load image: %s", IMG_GetError());
+  } else {
+    SDL_Log("Image loaded successfully");
+  }
   bg_renderer->bg_tex = SDL_CreateTextureFromSurface(state->renderer, surface);
   SDL_FreeSurface(surface);
 
@@ -23,9 +28,9 @@ BGRenderer *bg_renderer_new(GameState *state) {
   return bg_renderer;
 }
 
-static void bg_renderer_update(GameState *state, void *context) {}
+static void update(GameState *state, void *context) {}
 
-static void bg_renderer_render(GameState *state, void *context) {
+static void render(GameState *state, void *context) {
   BGRenderer *bg_renderer = (BGRenderer *)context;
 
   int bg_wdith = 640 * 3;

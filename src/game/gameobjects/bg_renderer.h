@@ -11,7 +11,7 @@ typedef struct {
 } BGRenderer;
 
 BGRenderer *bg_renderer_new(GameState *state);
-static void bg_renderer_update(GameState *state, void *context);
-static void bg_renderer_render(GameState *state, void *context);
+static void update(GameState *state, void *context);
+static void render(GameState *state, void *context);
 
 #endif

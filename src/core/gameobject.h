@@ -6,19 +6,19 @@
 
 struct GameState;
 
-typedef void (*update_go)(struct GameState *, void *);
-typedef void (*render_go)(struct GameState *, void *);
+typedef void (*update_func)(struct GameState *, void *);
+typedef void (*render_func)(struct GameState *, void *);
 
 typedef struct {
   uint32_t instance_id;
   void *binding;
   Vector2 position;
   float angle;
-  update_go update;
-  render_go render;
+  update_func update;
+  render_func render;
 } GameObject;
 
-GameObject *go_create(uint32_t instance_id, void *binding, update_go update,
-                      render_go render);
+GameObject *go_create(uint32_t instance_id, void *binding, update_func update,
+                      render_func render);
 
 #endif

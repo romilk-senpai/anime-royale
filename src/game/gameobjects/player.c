@@ -15,8 +15,8 @@
 Player *player_new(GameState *state) {
   Player *player = malloc(sizeof(Player));
 
-  GameObject *go = go_create(go_pool_new_id(state->go_pool), player,
-                             player_update, player_render);
+  GameObject *go =
+      go_create(go_pool_new_id(state->go_pool), player, update, render);
   player->go = go;
 
   Pistol *pistol = pistol_new(state);
@@ -46,7 +46,7 @@ Player *player_new(GameState *state) {
   return player;
 }
 
-static void player_update(GameState *state, void *context) {
+static void update(GameState *state, void *context) {
   Player *player = (Player *)context;
   Vector2 movement = vector2_mul_scalar(state->input->movement, 350.0);
   movement = vector2_mul_scalar(movement, state->time->delta_time);
@@ -71,7 +71,7 @@ static void player_update(GameState *state, void *context) {
   state->camera->position = player->go->position;
 }
 
-static void player_render(GameState *state, void *context) {
+static void render(GameState *state, void *context) {
   Player *player = (Player *)context;
   SDL_Rect c_rect;
   c_rect.w = 32 * 3;
@@ -102,4 +102,15 @@ static void player_render(GameState *state, void *context) {
                    NULL, &h_rect, 0.0f, NULL,
                    player->look_dir.x >= 0 ? SDL_FLIP_NONE
                                            : SDL_FLIP_HORIZONTAL);
+
+  SDL_Rect rect;
+  rect.w = 50;
+  rect.h = 50;
+  Vector2 square_pos = world_to_screen_pos(state->camera, vector2_zero());
+  rect.x = square_pos.x;
+  rect.y = square_pos.y;
+
+  SDL_SetRenderDrawColor(state->renderer,
+                         (int)((sin(state->time->time) + 1) * 127), 0, 0, 255);
+  SDL_RenderFillRect(state->renderer, &rect);
 }

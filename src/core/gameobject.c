@@ -2,8 +2,8 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-GameObject *go_create(uint32_t instance_id, void *binding, update_go update,
-                   render_go render) {
+GameObject *go_create(uint32_t instance_id, void *binding, update_func update,
+                   render_func render) {
   GameObject *go = malloc(sizeof(GameObject));
   *go = (GameObject){.instance_id = instance_id,
                      .binding = binding,

@@ -30,6 +30,8 @@ if(EMSCRIPTEN)
     set(CMAKE_C_COMPILER emcc)
     add_compile_definitions("__EMSCRIPTEN__")
     target_link_options(${PROJECT_NAME} PRIVATE
+        "--bind"
+        "-sWASM=1"
         "-sMODULARIZE=1"
         "-sEXPORT_NAME='Main'"
         "-sINVOKE_RUN=0"
@@ -37,22 +39,17 @@ if(EMSCRIPTEN)
         "-sEXPORTED_RUNTIME_METHODS=['callMain', 'ccall', 'cwrap']"
         "-sFORCE_FILESYSTEM=1"
         "-sUSE_SDL=2"
+        "-sUSE_SDL_IMAGE=2"
+        "-sSDL2_IMAGE_FORMATS=['png']"
         "-sALLOW_MEMORY_GROWTH=1"
         "-sASYNCIFY"
-        "-sDISABLE_DEPRECATED_FIND_EVENT_TARGET_BEHAVIOR"
-        "--use-port=sdl2_image:formats=png"
+        "-sDISABLE_DEPRECATED_FIND_EVENT_TARGET_BEHAVIOR=1"
+        "--preload-file assets/"
+        "--use-preload-plugins"
+        # "-O2"
     )
-    add_custom_command(
-        TARGET ${PROJECT_NAME} POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_SOURCE_DIR}/html/*
-                ${CMAKE_BINARY_DIR}/
-        )
     target_link_libraries(${PROJECT_NAME} core rcds)
 else()
     target_link_libraries(core rcds)
     target_link_libraries(${PROJECT_NAME} core SDL2 SDL2_image m rcds)
 endif()
-
-
-

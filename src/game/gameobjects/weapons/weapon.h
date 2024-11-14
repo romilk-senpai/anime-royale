@@ -4,14 +4,14 @@
 #include "game.h"
 #include "gameobject.h"
 
-typedef void (*fire)(GameState *, void *);
+typedef void (*fire_func)(GameState *, void *);
 
 typedef struct {
   GameObject *go;
   void *binding;
-  fire fire;
+  fire_func fire;
 } Weapon;
 
-Weapon *weapon_new(GameObject *go, void *binding, fire fire);
+Weapon *weapon_new(GameObject *go, void *binding, fire_func fire);
 
 #endif

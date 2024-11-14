@@ -11,9 +11,9 @@ Shotgun *shotgun_new(GameState *state) {
   Shotgun *shotgun = malloc(sizeof(Shotgun));
 
   GameObject *go = go_create(go_pool_new_id(state->go_pool), shotgun,
-                             shotgun_update, shotgun_render);
+                             update, render);
 
-  Weapon *weapon = weapon_new(go, shotgun, shotgun_fire);
+  Weapon *weapon = weapon_new(go, shotgun, fire);
   shotgun->go = go;
   shotgun->weapon = weapon;
 
@@ -22,7 +22,7 @@ Shotgun *shotgun_new(GameState *state) {
   return shotgun;
 }
 
-static void shotgun_fire(GameState *state, void *context) {
+static void fire(GameState *state, void *context) {
   Shotgun *shotgun = (Shotgun *)context;
 
   if (state->time->time - shotgun->last_shot_time < 1.0f / SHOTGUN_FIRE_RATE) {
@@ -45,6 +45,6 @@ static void shotgun_fire(GameState *state, void *context) {
   shotgun->last_shot_time = state->time->time;
 }
 
-static void shotgun_update(GameState *state, void *context) {}
+static void update(GameState *state, void *context) {}
 
-static void shotgun_render(GameState *state, void *context) {}
+static void render(GameState *state, void *context) {}

@@ -8,7 +8,7 @@ BasicBullet *bullet_new(GameState *state, Vector2 position, Vector2 direction,
   BasicBullet *bullet = malloc(sizeof(BasicBullet));
 
   GameObject *go = go_create(go_pool_new_id(state->go_pool), bullet,
-                             bullet_update, bullet_render);
+                             update, render);
   go->position = position;
 
   bullet->go = go;
@@ -20,7 +20,7 @@ BasicBullet *bullet_new(GameState *state, Vector2 position, Vector2 direction,
   return bullet;
 }
 
-static void bullet_update(GameState *state, void *context) {
+static void update(GameState *state, void *context) {
   BasicBullet *bullet = (BasicBullet *)context;
   bullet->go->position = vector2_add(
       bullet->go->position,
@@ -28,7 +28,7 @@ static void bullet_update(GameState *state, void *context) {
                          BASIC_BULLET_SPEED * state->time->delta_time));
 }
 
-static void bullet_render(GameState *state, void *context) {
+static void render(GameState *state, void *context) {
   BasicBullet *bullet = (BasicBullet *)context;
   SDL_Rect rect;
   rect.w = 15;

@@ -15,8 +15,8 @@ typedef struct {
 } Pistol;
 
 Pistol *pistol_new(GameState *state);
-static void pistol_fire(GameState *state, void *context);
-static void pistol_update(GameState *state, void *context);
-static void pistol_render(GameState *state, void *context);
+static void fire(GameState *state, void *context);
+static void update(GameState *state, void *context);
+static void render(GameState *state, void *context);
 
 #endif
