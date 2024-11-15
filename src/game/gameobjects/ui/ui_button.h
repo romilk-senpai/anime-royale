@@ -13,6 +13,7 @@ typedef struct {
   Vector2 size;
   SDL_Texture *bg_tex;
   SDL_Texture *text_tex;
+  int hovered;
 } UIButton;
 
 UIButton *button_new(GameState *state, Vector2 size, char *bg_sprite_path,
