@@ -36,11 +36,11 @@ static void fire(GameState *state, void *context) {
   Vector2 mouse_right = vector2_rotate(mouse_forward, -30.0f);
 
   BasicBullet *bullet_f =
-      bullet_new(state, shotgun->go->position, mouse_forward, 5.0f);
+      bullet_new(state, shotgun->go->position, mouse_forward, 0.5f);
   BasicBullet *bullet_r =
-      bullet_new(state, shotgun->go->position, mouse_left, 5.0f);
+      bullet_new(state, shotgun->go->position, mouse_left, 0.5f);
   BasicBullet *bullet_l =
-      bullet_new(state, shotgun->go->position, mouse_right, 5.0f);
+      bullet_new(state, shotgun->go->position, mouse_right, 0.5f);
 
   shotgun->last_shot_time = state->time->time;
 }

@@ -34,7 +34,7 @@ static void fire(GameState *state, void *context) {
                   world_to_screen_pos(state->camera, pistol->go->position)));
 
   BasicBullet *bullet =
-      bullet_new(state, pistol->go->position, direction, 5.0f);
+      bullet_new(state, pistol->go->position, direction, 0.5f);
 
   pistol->last_shot_time = state->time->time;
 }
