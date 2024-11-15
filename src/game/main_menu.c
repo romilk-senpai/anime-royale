@@ -29,6 +29,8 @@ MainMenu *main_menu_new(GameState *state) {
   main_menu->about_button->event_context = main_menu;
   main_menu->about_button->onclick = onclick_about;
 
+// to where do you want quit in web?
+#ifndef __EMSCRIPTEN__
   main_menu->exit_button =
       button_new(state, button_size, "assets/menu-button.png", "Exit", font,
                  (SDL_Color){0, 0, 0, 255});
@@ -37,6 +39,7 @@ MainMenu *main_menu_new(GameState *state) {
   main_menu->bg_renderer = bg_renderer_new(state);
   main_menu->exit_button->event_context = main_menu;
   main_menu->exit_button->onclick = onclick_exit;
+#endif
 
   TTF_CloseFont(font);
   return main_menu;
