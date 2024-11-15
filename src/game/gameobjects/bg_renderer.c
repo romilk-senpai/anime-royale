@@ -55,3 +55,10 @@ static void render(GameState *state, void *context) {
     render_x += bg_wdith;
   }
 }
+
+void free_bg_renderer(BGRenderer *renderer, GameState *state) {
+  go_pool_unbind(state->go_pool, renderer->go);
+  SDL_DestroyTexture(renderer->bg_tex);
+  free(renderer->go);
+  free(renderer);
+}

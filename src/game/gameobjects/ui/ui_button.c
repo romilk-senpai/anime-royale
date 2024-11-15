@@ -61,3 +61,11 @@ static void render(GameState *state, void *context) {
       text_height};
   SDL_RenderCopy(state->renderer, button->text_tex, NULL, &text_rect);
 }
+
+void free_button(UIButton *button, GameState *state) {
+  go_pool_unbind(state->go_pool, button->go);
+  SDL_DestroyTexture(button->text_tex);
+  SDL_DestroyTexture(button->bg_tex);
+  free(button->go);
+  free(button);
+}

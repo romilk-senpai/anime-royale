@@ -13,5 +13,6 @@ typedef struct {
 BGRenderer *bg_renderer_new(GameState *state);
 static void update(GameState *state, void *context);
 static void render(GameState *state, void *context);
+void free_bg_renderer(BGRenderer *renderer, GameState *state);
 
 #endif
