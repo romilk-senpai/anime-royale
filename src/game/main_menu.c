@@ -1,14 +1,10 @@
 #include "main_menu.h"
-#include "go_pool.h"
-#include "ui_button.h"
+#include "anigame.h"
 #include "vector2.h"
 #include <SDL2/SDL_ttf.h>
 
-MainMenu *main_menu_create(GameState *state) {
+MainMenu *main_menu_new(GameState *state) {
   MainMenu *main_menu = malloc(sizeof(MainMenu));
-  GameObject *go =
-      go_create(go_pool_new_id(state->go_pool), main_menu, update, render);
-  main_menu->go = go;
   TTF_Font *font = TTF_OpenFont("assets/font.ttf", 18);
   if (!font) {
     SDL_Log("Unable to open font: %s", TTF_GetError());
@@ -22,21 +18,33 @@ MainMenu *main_menu_create(GameState *state) {
                  font, (SDL_Color){0, 0, 0, 255});
   main_menu->start_game_button->go->position =
       vector2_sub(center_offset, (Vector2){0, 45});
+  main_menu->start_game_button->event_context = main_menu;
+  main_menu->start_game_button->onclick = onclick_start;
+
   main_menu->about_button =
-      button_new(state, button_size, "assets/menu-button.png", "About",
-                 font, (SDL_Color){0, 0, 0, 255});
+      button_new(state, button_size, "assets/menu-button.png", "About", font,
+                 (SDL_Color){0, 0, 0, 255});
   main_menu->about_button->go->position = center_offset;
+  main_menu->about_button->event_context = main_menu;
+  main_menu->about_button->onclick = onclick_about;
+
   main_menu->exit_button =
-      button_new(state, button_size, "assets/menu-button.png", "Exit",
-                 font, (SDL_Color){0, 0, 0, 255});
+      button_new(state, button_size, "assets/menu-button.png", "Exit", font,
+                 (SDL_Color){0, 0, 0, 255});
   main_menu->exit_button->go->position =
       vector2_add(center_offset, (Vector2){0, 45});
-  go_pool_bind(state->go_pool, main_menu->go);
   main_menu->bg_renderer = bg_renderer_new(state);
+  main_menu->exit_button->event_context = main_menu;
+  main_menu->exit_button->onclick = onclick_exit;
+
   TTF_CloseFont(font);
   return main_menu;
 }
 
-static void update(GameState *state, void *context) {}
+static void onclick_start(GameState *state, void *context) {
+    anigame_new(state);
+}
 
-static void render(GameState *state, void *context) {}
+static void onclick_about(GameState *state, void *context) {}
+
+static void onclick_exit(GameState *state, void *context) { state->quit = 1; }

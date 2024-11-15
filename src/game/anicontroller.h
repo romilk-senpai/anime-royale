@@ -6,9 +6,9 @@
 
 typedef struct {
   GameController *game_controller;
-} ARController;
+} AniController;
 
-ARController *ar_controller_new();
+AniController *anicontroller_new();
 static void start(GameState *state, void *context);
 static void before_update(GameState *state, void *context);
 static void post_update(GameState *state, void *context);

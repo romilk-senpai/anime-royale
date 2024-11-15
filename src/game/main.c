@@ -1,4 +1,4 @@
-#include "ar_controller.h"
+#include "anicontroller.h"
 #include <game.h>
 
 #ifdef __EMSCRIPTEN__
@@ -6,7 +6,7 @@
 #endif
 
 int main(int argc, char *args[]) {
-  ARController *ar_controller = ar_controller_new();
+  AniController *ar_controller = anicontroller_new();
   GameState *state = init_game(ar_controller->game_controller);
 
 #ifdef __EMSCRIPTEN__

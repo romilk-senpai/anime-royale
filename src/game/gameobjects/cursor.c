@@ -12,7 +12,7 @@ Cursor *cursor_new(GameState *state) {
   GameObject *go = go_create(go_pool_new_id(state->go_pool), cursor,
                              update, render);
   cursor->go = go;
-  go->z_index = 100;
+  go->z_index = 1000;
 
   cursor->cursor_tex = create_sdl_texture(state->renderer, "assets/cursor.png");
 

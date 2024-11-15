@@ -34,6 +34,11 @@ static void update(GameState *state, void *context) {
                     mouse_pos.x < button->go->position.x + button->size.x &&
                     mouse_pos.y > button->go->position.y &&
                     mouse_pos.y < button->go->position.y + button->size.y;
+  if (button->hovered && state->input->mouse_down) {
+    if (button->onclick != NULL) {
+      button->onclick(state, button->event_context);
+    }
+  }
 }
 
 static void render(GameState *state, void *context) {

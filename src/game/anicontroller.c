@@ -1,14 +1,10 @@
-#include "ar_controller.h"
+#include "anicontroller.h"
 #include "game.h"
-#include "game_controller.h"
-#include "gameobjects/bg_renderer.h"
-#include "gameobjects/cursor.h"
-#include "gameobjects/player.h"
-#include "gameobjects/ui/main_menu.h"
+#include "main_menu.h"
 #include <stdlib.h>
 
-ARController *ar_controller_new() {
-  ARController *ar_controller = malloc(sizeof(ARController));
+AniController *anicontroller_new() {
+  AniController *ar_controller = malloc(sizeof(AniController));
   GameController *game_controller = malloc(sizeof(GameController));
   *game_controller = (GameController){.binding = ar_controller,
                                       .on_start = start,
@@ -21,10 +17,7 @@ ARController *ar_controller_new() {
 }
 
 static void start(GameState *state, void *context) {
-  // Player *player = player_new(state);
-  // Cursor *cursor = cursor_new(state);
-  // BGRenderer *renderer = bg_renderer_new(state);
-  MainMenu *main_menu = main_menu_create(state);
+  MainMenu *main_menu = main_menu_new(state);
 }
 
 static void before_update(GameState *state, void *context) {}

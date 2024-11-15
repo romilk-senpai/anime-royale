@@ -1,12 +1,14 @@
 #ifndef MENU_BUTTON_H
 #define MENU_BUTTON_H
 
-#include "gameobject.h"
 #include "game.h"
+#include "gameobject.h"
 #include "vector2.h"
 #include <SDL2/SDL_rect.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_ttf.h>
+
+typedef void (*onclick_func)(GameState *, void *);
 
 typedef struct {
   GameObject *go;
@@ -14,6 +16,8 @@ typedef struct {
   SDL_Texture *bg_tex;
   SDL_Texture *text_tex;
   int hovered;
+  void *event_context;
+  onclick_func onclick;
 } UIButton;
 
 UIButton *button_new(GameState *state, Vector2 size, char *bg_sprite_path,
