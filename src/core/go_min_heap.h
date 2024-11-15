@@ -11,6 +11,7 @@ typedef struct {
 min_heap *min_heap_new();
 min_heap *min_heap_new_cap(size_t capacity);
 void min_heap_insert(min_heap *min_heap, GameObject *go);
+GameObject *min_heap_remove_min(min_heap *heap);
 void min_heap_free(min_heap *min_heap);
 
 #endif

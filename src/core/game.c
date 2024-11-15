@@ -196,13 +196,11 @@ void render_game(GameState *state) {
   SDL_SetRenderDrawColor(state->renderer, 0, 0, 0, 255);
   SDL_RenderClear(state->renderer);
 
-  // hash_map_for_each(state->go_pool->go_map, render_go_map, state);
-
   min_heap *heap = min_heap_new_cap(state->go_pool->go_map->size);
   hash_map_for_each(state->go_pool->go_map, render_create_min_heap, heap);
-  for (size_t i = 0; i < heap->v->size; i++) {
-    GameObject *go = vector_get(heap->v, GameObject *, i);
-    go->render(state, go->binding);
+  while (heap->v->size > 0) {
+    GameObject *go = min_heap_remove_min(heap);
+        go->render(state, go->binding);
   }
 
   min_heap_free(heap);
