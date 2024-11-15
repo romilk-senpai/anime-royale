@@ -16,5 +16,6 @@ MainMenu *main_menu_new(GameState *state);
 static void onclick_start(GameState *state, void *context);
 static void onclick_about(GameState *state, void *context);
 static void onclick_exit(GameState *state, void *context);
+static void main_menu_free(MainMenu *main_menu, GameState *state);
 
 #endif

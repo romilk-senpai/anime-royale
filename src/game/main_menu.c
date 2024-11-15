@@ -1,5 +1,6 @@
 #include "main_menu.h"
 #include "anigame.h"
+#include "game.h"
 #include "vector2.h"
 #include <SDL2/SDL_ttf.h>
 
@@ -42,9 +43,18 @@ MainMenu *main_menu_new(GameState *state) {
 }
 
 static void onclick_start(GameState *state, void *context) {
-    anigame_new(state);
+  anigame_new(state);
+  main_menu_free((MainMenu *)context, state);
 }
 
 static void onclick_about(GameState *state, void *context) {}
 
 static void onclick_exit(GameState *state, void *context) { state->quit = 1; }
+
+static void main_menu_free(MainMenu *main_menu, GameState *state) {
+  free_button(main_menu->start_game_button, state);
+  free_button(main_menu->about_button, state);
+  free_button(main_menu->exit_button, state);
+  free_bg_renderer(main_menu->bg_renderer, state);
+  free(main_menu);
+}
