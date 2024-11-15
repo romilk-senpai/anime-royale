@@ -57,7 +57,7 @@ static void update(GameState *state, void *context) {
 
   player->weapon->go->position = player->go->position;
 
-  if (state->input->fire == 1) {
+  if (state->input->mouse_held == 1) {
     player->weapon->fire(state, player->weapon->binding);
   }
 

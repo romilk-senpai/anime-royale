@@ -13,7 +13,8 @@ typedef struct {
 typedef struct {
   Vector2 movement;
   Vector2 mouse_pos;
-  int fire;
+  int mouse_held;
+  int mouse_down;
   ItemSoltInput *item_slot_input;
 } Input;
 

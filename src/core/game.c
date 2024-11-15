@@ -7,6 +7,7 @@
 #include "vector.h"
 #include "vector2.h"
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_events.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_keycode.h>
 #include <SDL2/SDL_log.h>
@@ -115,7 +116,8 @@ void handle_time(GameState *state) {
 }
 
 void process_input(GameState *state) {
-  state->input->fire = 0;
+  state->input->mouse_held = 0;
+  state->input->mouse_down = 0;
   *state->input->item_slot_input = (ItemSoltInput){0, 0, 0, 0};
 
   SDL_Event e;
@@ -135,6 +137,10 @@ void process_input(GameState *state) {
         state->input->item_slot_input->item3 = 1;
       case SDLK_4:
         state->input->item_slot_input->item4 = 1;
+      }
+    case SDL_MOUSEBUTTONDOWN:
+      if (e.button.button == SDL_BUTTON_LEFT) {
+        state->input->mouse_down = 1;
       }
     }
   }
@@ -159,7 +165,7 @@ void process_input(GameState *state) {
 
   Uint32 mousestate = SDL_GetMouseState(&mouse_x, &mouse_y);
 
-  state->input->fire = mousestate & SDL_BUTTON(SDL_BUTTON_LEFT);
+  state->input->mouse_held = mousestate & SDL_BUTTON(SDL_BUTTON_LEFT);
   state->input->mouse_pos = (Vector2){mouse_x, mouse_y};
   state->input->movement = vector2_normalize(in_move);
 }
