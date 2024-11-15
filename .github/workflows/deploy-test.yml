@@ -14,11 +14,11 @@ jobs:
 
       - name: Verify
         run: emcc -v
-      
+ 
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y cmake libsdl2-dev libsdl2-image-dev clang
+          sudo apt-get install -y cmake libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev clang
 
       - name: Build rcds
         run: |
