@@ -46,7 +46,7 @@ void go_pool_bind(GOPool *go_pool, GameObject *go) {
 }
 
 void go_pool_unbind(GOPool *go_pool, GameObject *go) {
-    if (!hash_map_contains(go_pool->go_map, &go->instance_id)) {
+  if (!hash_map_contains(go_pool->go_map, &go->instance_id)) {
     fprintf(stderr, "pool does not contain an object with id %u: %u\n",
             go->instance_id,
             ((GameObject *)hash_map_get(go_pool->go_map, &go->instance_id))

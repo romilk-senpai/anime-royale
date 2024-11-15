@@ -36,11 +36,10 @@ MainMenu *main_menu_new(GameState *state) {
                  (SDL_Color){0, 0, 0, 255});
   main_menu->exit_button->go->position =
       vector2_add(center_offset, (Vector2){0, 45});
-  main_menu->bg_renderer = bg_renderer_new(state);
   main_menu->exit_button->event_context = main_menu;
   main_menu->exit_button->onclick = onclick_exit;
 #endif
-
+  main_menu->bg_renderer = bg_renderer_new(state);
   TTF_CloseFont(font);
   return main_menu;
 }
@@ -57,7 +56,9 @@ static void onclick_exit(GameState *state, void *context) { state->quit = 1; }
 static void main_menu_free(MainMenu *main_menu, GameState *state) {
   free_button(main_menu->start_game_button, state);
   free_button(main_menu->about_button, state);
+#ifndef __EMSCRIPTEN__
   free_button(main_menu->exit_button, state);
+#endif
   free_bg_renderer(main_menu->bg_renderer, state);
   free(main_menu);
 }
