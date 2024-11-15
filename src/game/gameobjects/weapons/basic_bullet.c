@@ -1,5 +1,7 @@
 #include "basic_bullet.h"
+#include "go_pool.h"
 #include <SDL2/SDL_stdinc.h>
+#include <stdlib.h>
 #include <vector2.h>
 
 const float BASIC_BULLET_SPEED = 1000.0f;
@@ -8,15 +10,15 @@ BasicBullet *bullet_new(GameState *state, Vector2 position, Vector2 direction,
                         float life_time) {
   BasicBullet *bullet = malloc(sizeof(BasicBullet));
 
-  GameObject *go = go_create(go_pool_new_id(state->go_pool), bullet,
-                             update, render);
+  GameObject *go =
+      go_create(go_pool_new_id(state->go_pool), bullet, update, render);
   go->position = position;
   go->z_index = 15;
   SDL_log(go->z_index);
 
   bullet->go = go;
   bullet->direction = direction;
-  bullet->life_time = life_time;
+  bullet->destroy_time = state->time->time + life_time;
 
   go_pool_bind(state->go_pool, go);
 
@@ -25,6 +27,10 @@ BasicBullet *bullet_new(GameState *state, Vector2 position, Vector2 direction,
 
 static void update(GameState *state, void *context) {
   BasicBullet *bullet = (BasicBullet *)context;
+  if (state->time->time > bullet->destroy_time) {
+    bullet_free(bullet, state);
+    return;
+  }
   bullet->go->position = vector2_add(
       bullet->go->position,
       vector2_mul_scalar(bullet->direction,
@@ -46,4 +52,10 @@ static void render(GameState *state, void *context) {
 
   SDL_SetRenderDrawColor(state->renderer, 255, 0, 0, 255);
   SDL_RenderFillRect(state->renderer, &rect);
+}
+
+void bullet_free(BasicBullet *bullet, GameState *state) {
+  go_pool_unbind(state->go_pool, bullet->go);
+  free(bullet->go);
+  free(bullet);
 }
