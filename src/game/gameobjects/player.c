@@ -1,6 +1,7 @@
 #include "player.h"
 #include "../sdl_helper.h"
 #include "camera.h"
+#include "weapons/auto_rifle.h"
 #include "weapons/pistol.h"
 #include "weapons/radial_gun.h"
 #include "weapons/shotgun.h"
@@ -25,11 +26,13 @@ Player *player_new(GameState *state) {
   Pistol *pistol = pistol_new(state);
   Shotgun *shotgun = shotgun_new(state);
   RadGun *radgun = radgun_new(state);
+  AutoRifle *a_rifle = auto_rifle_new(state);
 
   player->weapon_inv = malloc(sizeof(Weapon) * 4);
   player->weapon_inv[0] = pistol->weapon;
   player->weapon_inv[1] = shotgun->weapon;
   player->weapon_inv[2] = radgun->weapon;
+  player->weapon_inv[3] = a_rifle->weapon;
 
   player->weapon = player->weapon_inv[0];
 
@@ -54,6 +57,8 @@ static void update(GameState *state, void *context) {
     player->weapon = player->weapon_inv[1];
   } else if (state->input->item_slot_input->item3) {
     player->weapon = player->weapon_inv[2];
+  } else if (state->input->item_slot_input->item4) {
+    player->weapon = player->weapon_inv[3];
   }
 
   player->look_dir = vector2_normalize(

@@ -3,7 +3,6 @@
 
 #include "game.h"
 #include "gameobject.h"
-#include <SDL2/SDL_stdinc.h>
 
 typedef struct {
   GameObject *go;

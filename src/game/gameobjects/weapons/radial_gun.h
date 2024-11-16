@@ -4,6 +4,7 @@
 #include "game.h"
 #include "gameobject.h"
 #include "weapon.h"
+
 typedef struct {
   GameObject *go;
   Weapon *weapon;
