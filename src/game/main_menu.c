@@ -4,6 +4,10 @@
 #include "vector2.h"
 #include <SDL2/SDL_ttf.h>
 
+#ifdef __EMSCRIPTEN__
+#include "emscripten.h"
+#endif
+
 MainMenu *main_menu_new(GameState *state) {
   MainMenu *main_menu = malloc(sizeof(MainMenu));
   TTF_Font *font = TTF_OpenFont("assets/font.ttf", 18);
@@ -49,7 +53,14 @@ static void onclick_start(GameState *state, void *context) {
   main_menu_free((MainMenu *)context, state);
 }
 
-static void onclick_about(GameState *state, void *context) {}
+static void onclick_about(GameState *state, void *context) {
+#ifdef __EMSCRIPTEN__
+  emscripten_run_script("window.open('https://github.com/romilk-senpai/"
+                        "anime-royale', '_blank');");
+#elif defined(__linux__)
+  system("xdg-open https://github.com/romilk-senpai/anime-royale");
+#endif
+}
 
 static void onclick_exit(GameState *state, void *context) { state->quit = 1; }
 
