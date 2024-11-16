@@ -5,13 +5,13 @@
 #include "vector2.h"
 #include "weapon.h"
 
-const float SHOTGUN_FIRE_RATE = 2.0f;
+const float RADUN_FIRE_RATE = 2.0f;
 
 Shotgun *shotgun_new(GameState *state) {
   Shotgun *shotgun = malloc(sizeof(Shotgun));
 
-  GameObject *go = go_create(go_pool_new_id(state->go_pool), shotgun,
-                             update, render);
+  GameObject *go =
+      go_create(go_pool_new_id(state->go_pool), shotgun, update, render);
 
   Weapon *weapon = weapon_new(go, shotgun, fire);
   shotgun->go = go;
@@ -25,7 +25,7 @@ Shotgun *shotgun_new(GameState *state) {
 static void fire(GameState *state, void *context) {
   Shotgun *shotgun = (Shotgun *)context;
 
-  if (state->time->time - shotgun->last_shot_time < 1.0f / SHOTGUN_FIRE_RATE) {
+  if (state->time->time - shotgun->last_shot_time < 1.0f / RADUN_FIRE_RATE) {
     return;
   }
 

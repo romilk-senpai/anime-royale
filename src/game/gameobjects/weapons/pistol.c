@@ -5,13 +5,13 @@
 #include "vector2.h"
 #include "weapon.h"
 
-const float PISTOL_FIRE_RATE = 4.0f;
+const float PISTOL_FIRE_RATE = 3.0f;
 
 Pistol *pistol_new(GameState *state) {
   Pistol *pistol = malloc(sizeof(Pistol));
 
-  GameObject *go = go_create(go_pool_new_id(state->go_pool), pistol,
-                             update, render);
+  GameObject *go =
+      go_create(go_pool_new_id(state->go_pool), pistol, update, render);
 
   Weapon *weapon = weapon_new(go, pistol, fire);
   pistol->go = go;
