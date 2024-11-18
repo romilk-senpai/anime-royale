@@ -12,6 +12,8 @@ typedef struct {
   Weapon **weapon_inv;
   Weapon *weapon;
   Vector2 look_dir;
+  float move_speed;
+  Vector2 move_dir;
   SDL_Texture *c_f_tex;
   SDL_Texture *h_f_tex;
   SDL_Texture *c_b_tex;

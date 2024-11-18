@@ -8,6 +8,7 @@
 #include <SDL2/SDL_pixels.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_surface.h>
+#include <SDL2/SDL_ttf.h>
 #include <stdlib.h>
 
 UIButton *button_new(GameState *state, Vector2 size, char *bg_sprite_path,
@@ -20,7 +21,7 @@ UIButton *button_new(GameState *state, Vector2 size, char *bg_sprite_path,
   button->bg_tex = create_sdl_texture(state->renderer, bg_sprite_path);
   button->size = size;
   button->hovered = 0;
-  SDL_Surface *text_surf = TTF_RenderText_Solid(font, text, text_color);
+  SDL_Surface *text_surf = TTF_RenderText_Blended(font, text, text_color);
   button->text_tex = SDL_CreateTextureFromSurface(state->renderer, text_surf);
   SDL_FreeSurface(text_surf);
   go_pool_bind(state->go_pool, go);

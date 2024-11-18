@@ -1,6 +1,6 @@
 #include "player.h"
 #include "../sdl_helper.h"
-#include "camera.h"
+#include "vector2.h"
 #include "weapons/auto_rifle.h"
 #include "weapons/pistol.h"
 #include "weapons/radial_gun.h"
@@ -9,11 +9,8 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_rect.h>
 #include <SDL2/SDL_render.h>
-#include <game.h>
-#include <gameobject.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <vector2.h>
+
+const float MOVE_SPEED;
 
 Player *player_new(GameState *state) {
   Player *player = malloc(sizeof(Player));
@@ -36,10 +33,14 @@ Player *player_new(GameState *state) {
 
   player->weapon = player->weapon_inv[0];
 
-  player->c_f_tex = create_sdl_texture(state->renderer, "assets/c_front.png");
+  player->c_f_tex = create_sdl_texture(state->renderer, "assets/gooba2.png");
   player->h_f_tex = create_sdl_texture(state->renderer, "assets/h_front.png");
   player->c_b_tex = create_sdl_texture(state->renderer, "assets/c_back.png");
   player->h_b_tex = create_sdl_texture(state->renderer, "assets/h_back.png");
+
+  player->move_speed = 0;
+  player->move_dir = vector2_zero();
+
   go_pool_bind(state->go_pool, go);
 
   return player;
@@ -47,9 +48,23 @@ Player *player_new(GameState *state) {
 
 static void update(GameState *state, void *context) {
   Player *player = (Player *)context;
-  Vector2 movement = vector2_mul_scalar(state->input->movement, 350.0);
-  movement = vector2_mul_scalar(movement, state->time->delta_time);
-  player->go->position = vector2_add(player->go->position, movement);
+  Vector2 movement = vector2_mul_scalar(state->input->movement, MOVE_SPEED);
+  // movement = vector2_mul_scalar(movement, state->time->delta_time);
+  // player->go->position = vector2_add(player->go->position, movement);
+  player->move_dir =
+      vector2_add(player->move_dir, vector2_mul_scalar(movement, 0.02f));
+
+  if (vector2_magnitude(movement) == 0) {
+    player->move_speed -= 0.02f;
+    if (player->move_speed > 0.1f) {
+      player->move_speed = 0.05f;
+    }
+  } else {
+    player->move_speed += 0.02f;
+    if (player->move_speed > 1.0f) {
+      player->move_speed = 1.0f;
+    }
+  }
 
   if (state->input->item_slot_input->item1) {
     player->weapon = player->weapon_inv[0];
@@ -96,13 +111,13 @@ static void render(GameState *state, void *context) {
   h_rect.y = render_pos.y - 6 * 3;
 
   SDL_RenderCopyEx(state->renderer,
-                   player->look_dir.y >= 0 ? player->c_f_tex : player->c_b_tex,
+                   player->look_dir.y >= 0 ? player->c_f_tex : player->c_f_tex,
                    NULL, &c_rect, 0.0f, NULL,
                    player->look_dir.x >= 0 ? SDL_FLIP_NONE
                                            : SDL_FLIP_HORIZONTAL);
-  SDL_RenderCopyEx(state->renderer,
-                   player->look_dir.y >= 0 ? player->h_f_tex : player->h_b_tex,
-                   NULL, &h_rect, 0.0f, NULL,
-                   player->look_dir.x >= 0 ? SDL_FLIP_NONE
-                                           : SDL_FLIP_HORIZONTAL);
+  // SDL_RenderCopyEx(state->renderer,
+  //                  player->look_dir.y >= 0 ? player->h_f_tex :
+  //                  player->h_b_tex, NULL, &h_rect, 0.0f, NULL,
+  //                  player->look_dir.x >= 0 ? SDL_FLIP_NONE
+  //                                          : SDL_FLIP_HORIZONTAL);
 }

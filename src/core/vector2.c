@@ -42,3 +42,10 @@ Vector2 vector2_rotate_rad(Vector2 v, float rad) {
   return (Vector2){v.x * cos_theta - v.y * sin_theta,
                    v.x * sin_theta + v.y * cos_theta};
 }
+
+float vector2_magnitude(Vector2 v) { return v.x * v.x + v.y * v.y; }
+
+Vector2 lerp(Vector2 a, Vector2 b, float t) {
+  Vector2 result = {(1.0f - t) * a.x + t * b.x, (1.0f - t) * a.y + t * b.y};
+  return vector2_normalize(result);
+}
