@@ -13,7 +13,9 @@
 #include <SDL2/SDL_log.h>
 #include <SDL2/SDL_mouse.h>
 #include <SDL2/SDL_render.h>
+#include <SDL2/SDL_stdinc.h>
 #include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_video.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -127,6 +129,15 @@ void process_input(GameState *state) {
       state->quit = 1;
       return;
 
+    case SDL_WINDOWEVENT:
+      if (e.window.event == SDL_WINDOWEVENT_RESIZED) {
+        // state->camera->viewbox = (Vector2){e.window.data1, e.window.data2};
+        break;
+      }
+    case SDL_MOUSEMOTION:
+      state->input->mouse_pos = (Vector2){e.motion.x, e.motion.y};
+      break;
+
     case SDL_KEYDOWN:
       switch (e.key.keysym.sym) {
       case SDLK_1:
@@ -160,13 +171,10 @@ void process_input(GameState *state) {
     in_move.x++;
   }
 
-  int mouse_x;
-  int mouse_y;
-
-  Uint32 mousestate = SDL_GetMouseState(&mouse_x, &mouse_y);
-
+  int mouses_x, mouses_y;
+  Uint32 mousestate = SDL_GetRelativeMouseState(&mouses_x, &mouses_y);
   state->input->mouse_held = mousestate & SDL_BUTTON(SDL_BUTTON_LEFT);
-  state->input->mouse_pos = (Vector2){mouse_x, mouse_y};
+  // state->input->mouse_pos = (Vector2){mouse_x, mouse_y};
   state->input->movement = vector2_normalize(in_move);
 }
 
@@ -200,7 +208,7 @@ void render_game(GameState *state) {
   hash_map_for_each(state->go_pool->go_map, render_create_min_heap, heap);
   while (heap->v->size > 0) {
     GameObject *go = min_heap_remove_min(heap);
-        go->render(state, go->binding);
+    go->render(state, go->binding);
   }
 
   min_heap_free(heap);
