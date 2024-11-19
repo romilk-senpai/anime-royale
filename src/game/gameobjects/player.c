@@ -7,10 +7,13 @@
 #include "weapons/shotgun.h"
 #include "weapons/weapon.h"
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_log.h>
 #include <SDL2/SDL_rect.h>
 #include <SDL2/SDL_render.h>
 
-const float MOVE_SPEED;
+const float MAX_SPEED = 350.0f;
+const float ACCELERATION = 350.0f;
+const float FRICTION = 0.8f;
 
 Player *player_new(GameState *state) {
   Player *player = malloc(sizeof(Player));
@@ -38,8 +41,7 @@ Player *player_new(GameState *state) {
   player->c_b_tex = create_sdl_texture(state->renderer, "assets/c_back.png");
   player->h_b_tex = create_sdl_texture(state->renderer, "assets/h_back.png");
 
-  player->move_speed = 0;
-  player->move_dir = vector2_zero();
+  player->movement = vector2_zero();
 
   go_pool_bind(state->go_pool, go);
 
@@ -48,23 +50,21 @@ Player *player_new(GameState *state) {
 
 static void update(GameState *state, void *context) {
   Player *player = (Player *)context;
-  Vector2 movement = vector2_mul_scalar(state->input->movement, MOVE_SPEED);
-  // movement = vector2_mul_scalar(movement, state->time->delta_time);
-  // player->go->position = vector2_add(player->go->position, movement);
-  player->move_dir =
-      vector2_add(player->move_dir, vector2_mul_scalar(movement, 0.02f));
-
-  if (vector2_magnitude(movement) == 0) {
-    player->move_speed -= 0.02f;
-    if (player->move_speed > 0.1f) {
-      player->move_speed = 0.05f;
-    }
-  } else {
-    player->move_speed += 0.02f;
-    if (player->move_speed > 1.0f) {
-      player->move_speed = 1.0f;
-    }
+  player->movement =
+      vector2_add(player->movement,
+                  vector2_mul_scalar(state->input->movement,
+                                     ACCELERATION * state->time->delta_time));
+  player->movement = vector2_mul_scalar(player->movement,
+                                        pow(FRICTION, state->time->delta_time));
+  float speed = vector2_magnitude(player->movement);
+  if (speed > MAX_SPEED) {
+    player->movement.x = (player->movement.x / speed) * MAX_SPEED;
+    player->movement.y = (player->movement.y / speed) * MAX_SPEED;
   }
+
+  Vector2 movement =
+      vector2_mul_scalar(player->movement, state->time->delta_time);
+  player->go->position = vector2_add(player->go->position, movement);
 
   if (state->input->item_slot_input->item1) {
     player->weapon = player->weapon_inv[0];
