@@ -1,4 +1,5 @@
 #include "auto_rifle.h"
+#include "../../sdl_helper.h"
 #include "basic_bullet.h"
 
 const float AUTO_RIFLE_FIRE_RATE = 8.0f;
@@ -10,6 +11,10 @@ AutoRifle *auto_rifle_new(GameState *state) {
       go_create(go_pool_new_id(state->go_pool), a_rifle, update, render);
 
   Weapon *weapon = weapon_new(go, a_rifle, fire);
+  TTF_Font *font = TTF_OpenFont("assets/font.ttf", 18);
+  weapon->icon_tex =
+      create_sdl_text(state->renderer, font, "AR", (SDL_Color){0, 0, 0, 255});
+  TTF_CloseFont(font);
   a_rifle->go = go;
   a_rifle->weapon = weapon;
 

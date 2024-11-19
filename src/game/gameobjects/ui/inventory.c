@@ -3,6 +3,7 @@
 #include <SDL2/SDL_log.h>
 #include <SDL2/SDL_render.h>
 #include <stdlib.h>
+#include <string.h>
 
 InventoryUI *inventory_ui_new(GameState *state, size_t slot_count,
                               Weapon **weapon_inv) {
@@ -48,13 +49,21 @@ static void render(GameState *state, void *context) {
   int start_y = state->camera->viewbox.y - item_height - 24;
   for (size_t i = 0; i < ui->slot_count; i++) {
     InventorySlotUI *slot = ui->slots + i;
-    SDL_Rect rect = {start_x + i * (item_width + spacing), start_y, item_height,
-                     item_height};
+    SDL_Rect bg_rect = {start_x + i * (item_width + spacing), start_y,
+                        item_height, item_height};
     if (slot->highlighted) {
       SDL_SetTextureAlphaMod(slot->bg_tex, 255);
     } else {
       SDL_SetTextureAlphaMod(slot->bg_tex, 150);
     }
-    SDL_RenderCopy(state->renderer, slot->bg_tex, NULL, &rect);
+    SDL_RenderCopy(state->renderer, slot->bg_tex, NULL, &bg_rect);
+    if (slot->bg_tex != NULL) {
+      SDL_Rect fg_rect;
+      fg_rect.w = 48;
+      fg_rect.h = 48;
+      fg_rect.x = bg_rect.x + item_width / 2 - fg_rect.w / 2;
+      fg_rect.y = bg_rect.y + item_height / 2 - fg_rect.h / 2;
+      SDL_RenderCopy(state->renderer, slot->fg_tex, NULL, &fg_rect);
+    }
   }
 }

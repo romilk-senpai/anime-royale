@@ -1,4 +1,5 @@
 #include "shotgun.h"
+#include "../../sdl_helper.h"
 #include "basic_bullet.h"
 #include "camera.h"
 #include "game.h"
@@ -14,6 +15,10 @@ Shotgun *shotgun_new(GameState *state) {
       go_create(go_pool_new_id(state->go_pool), shotgun, update, render);
 
   Weapon *weapon = weapon_new(go, shotgun, fire);
+  TTF_Font *font = TTF_OpenFont("assets/font.ttf", 18);
+  weapon->icon_tex =
+      create_sdl_text(state->renderer, font, "SG", (SDL_Color){0, 0, 0, 255});
+  TTF_CloseFont(font);
   shotgun->go = go;
   shotgun->weapon = weapon;
 

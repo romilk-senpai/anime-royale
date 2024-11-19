@@ -1,6 +1,8 @@
 #include "radial_gun.h"
+#include "../../sdl_helper.h"
 #include "basic_bullet.h"
 #include "vector2.h"
+#include <SDL2/SDL_ttf.h>
 
 const float PI = 3.141592653589793;
 const float RADGUN_FIRE_RATE = 1.0f;
@@ -13,6 +15,10 @@ RadGun *radgun_new(GameState *state) {
       go_create(go_pool_new_id(state->go_pool), radgun, update, render);
 
   Weapon *weapon = weapon_new(go, radgun, fire);
+  TTF_Font *font = TTF_OpenFont("assets/font.ttf", 18);
+  weapon->icon_tex =
+      create_sdl_text(state->renderer, font, "R", (SDL_Color){0, 0, 0, 255});
+  TTF_CloseFont(font);
   radgun->go = go;
   radgun->weapon = weapon;
 
@@ -36,8 +42,7 @@ static void fire(GameState *state, void *context) {
   for (int i = 0; i < NUM_DIRECTIONS; i++) {
     float angle = i * angle_step;
     Vector2 dir = vector2_rotate_rad(mouse_forward, angle);
-    BasicBullet *bullet =
-        bullet_new(state, radgun->go->position, dir, 0.35f);
+    BasicBullet *bullet = bullet_new(state, radgun->go->position, dir, 0.35f);
   }
 
   radgun->last_shot_time = state->time->time;

@@ -21,9 +21,7 @@ UIButton *button_new(GameState *state, Vector2 size, char *bg_sprite_path,
   button->bg_tex = create_sdl_texture(state->renderer, bg_sprite_path);
   button->size = size;
   button->hovered = 0;
-  SDL_Surface *text_surf = TTF_RenderText_Blended(font, text, text_color);
-  button->text_tex = SDL_CreateTextureFromSurface(state->renderer, text_surf);
-  SDL_FreeSurface(text_surf);
+  button->text_tex = create_sdl_text(state->renderer, font, text, text_color);
   go_pool_bind(state->go_pool, go);
   return button;
 }
