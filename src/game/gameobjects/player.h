@@ -1,6 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "ui/inventory.h"
 #include "vector2.h"
 #include "weapons/weapon.h"
 #include <SDL2/SDL_render.h>
@@ -11,6 +12,7 @@ typedef struct {
   GameObject *go;
   Weapon **weapon_inv;
   Weapon *weapon;
+  InventoryUI *inventory_ui;
   Vector2 look_dir;
   Vector2 movement;
   SDL_Texture *c_f_tex;

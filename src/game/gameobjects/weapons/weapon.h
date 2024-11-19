@@ -3,6 +3,7 @@
 
 #include "game.h"
 #include "gameobject.h"
+#include <SDL2/SDL_render.h>
 
 typedef void (*fire_func)(GameState *, void *);
 
@@ -10,6 +11,7 @@ typedef struct {
   GameObject *go;
   void *binding;
   fire_func fire;
+  SDL_Texture *icon_tex;
 } Weapon;
 
 Weapon *weapon_new(GameObject *go, void *binding, fire_func fire);

@@ -5,11 +5,13 @@
 #include "gameobjects/bg_renderer.h"
 #include "gameobjects/cursor.h"
 #include "gameobjects/player.h"
+#include "gameobjects/ui/inventory.h"
 
 typedef struct {
   Player *player;
   Cursor *cursor;
   BGRenderer *bg_renderer;
+  InventoryUI *inventory_ui;
 } AniGame;
 
 AniGame *anigame_new(GameState *state);
