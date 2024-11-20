@@ -5,7 +5,7 @@
 #include "gameobjects/bg_renderer.h"
 #include "gameobjects/cursor.h"
 #include "gameobjects/player.h"
-#include "gameobjects/ui/inventory.h"
+#include "gameobjects/ui/ui_inventory.h"
 
 typedef struct {
   Player *player;

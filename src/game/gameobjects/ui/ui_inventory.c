@@ -1,4 +1,4 @@
-#include "inventory.h"
+#include "ui_inventory.h"
 #include "../../sdl_helper.h"
 #include <SDL2/SDL_log.h>
 #include <SDL2/SDL_render.h>

@@ -1,12 +1,12 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "ui/inventory.h"
 #include "vector2.h"
 #include "weapons/weapon.h"
 #include <SDL2/SDL_render.h>
 #include <game.h>
 #include <gameobject.h>
+#include "ui/ui_inventory.h"
 
 typedef struct {
   GameObject *go;

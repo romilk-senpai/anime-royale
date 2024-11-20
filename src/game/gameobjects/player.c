@@ -1,6 +1,5 @@
 #include "player.h"
 #include "../sdl_helper.h"
-#include "ui/inventory.h"
 #include "vector2.h"
 #include "weapons/auto_rifle.h"
 #include "weapons/pistol.h"
