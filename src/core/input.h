@@ -15,6 +15,7 @@ typedef struct {
   Vector2 mouse_pos;
   int mouse_held;
   int mouse_down;
+  int map;
   ItemSoltInput *item_slot_input;
 } Input;
 

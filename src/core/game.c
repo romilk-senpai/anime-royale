@@ -120,6 +120,7 @@ void handle_time(GameState *state) {
 void process_input(GameState *state) {
   state->input->mouse_held = 0;
   state->input->mouse_down = 0;
+  state->input->map = 0;
   *state->input->item_slot_input = (ItemSoltInput){0, 0, 0, 0};
 
   SDL_Event e;
@@ -148,6 +149,8 @@ void process_input(GameState *state) {
         state->input->item_slot_input->item3 = 1;
       case SDLK_4:
         state->input->item_slot_input->item4 = 1;
+      case SDLK_TAB:
+        state->input->map = 1;
       }
     case SDL_MOUSEBUTTONDOWN:
       if (e.button.button == SDL_BUTTON_LEFT) {
