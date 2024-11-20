@@ -1,5 +1,6 @@
 #include "player.h"
 #include "../sdl_helper.h"
+#include "ui/ui_map.h"
 #include "vector2.h"
 #include "weapons/auto_rifle.h"
 #include "weapons/pistol.h"
@@ -34,7 +35,6 @@ Player *player_new(GameState *state) {
   player->weapon_inv[2] = radgun->weapon;
   player->weapon_inv[3] = a_rifle->weapon;
   player->weapon = player->weapon_inv[0];
-  player->inventory_ui = inventory_ui_new(state, 4, player->weapon_inv);
 
   player->c_f_tex = create_sdl_texture(state->renderer, "assets/gooba2.png");
   player->h_f_tex = create_sdl_texture(state->renderer, "assets/h_front.png");
@@ -78,6 +78,13 @@ static void update(GameState *state, void *context) {
   } else if (state->input->item_slot_input->item4) {
     player->weapon = player->weapon_inv[3];
     slot_inv_select(player->inventory_ui, 3);
+  }
+
+  if (state->input->map) {
+    if (player->ui_map->isShowing)
+      ui_map_hide(player->ui_map, state);
+    else
+      ui_map_show(player->ui_map, state);
   }
 
   player->look_dir = vector2_normalize(

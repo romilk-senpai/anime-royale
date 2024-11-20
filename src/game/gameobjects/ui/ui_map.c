@@ -1,0 +1,54 @@
+#include "ui_map.h"
+#include "go_pool.h"
+#include <SDL2/SDL_log.h>
+#include <SDL2/SDL_render.h>
+#include <stdlib.h>
+
+UIMap *ui_map_new(GameState *state, Vector2 *player_pos,
+                  LevelLayout *level_layout) {
+  UIMap *map = malloc(sizeof(UIMap));
+  GameObject *go =
+      go_create(go_pool_new_id(state->go_pool), map, update, render);
+  go->z_index = 101;
+  map->level_layout = level_layout;
+  map->player_pos = player_pos;
+  map->isShowing = 0;
+  map->go = go;
+  return map;
+}
+
+void ui_map_show(UIMap *map, GameState *state) {
+  map->isShowing = 1;
+  go_pool_bind(state->go_pool, map->go);
+}
+
+void ui_map_hide(UIMap *map, GameState *state) {
+  map->isShowing = 0;
+  go_pool_unbind(state->go_pool, map->go);
+}
+
+static void update(GameState *state, void *context) {}
+
+static void render(GameState *state, void *context) {
+  UIMap *map = (UIMap *)context;
+  SDL_Rect map_rect;
+  map_rect.w = 480;
+  map_rect.h = 480;
+  map_rect.x = state->camera->viewbox.x / 2.0f - map_rect.w / 2.0f;
+  map_rect.y = state->camera->viewbox.y / 2.0f - map_rect.h / 2.0f;
+  SDL_SetRenderDrawColor(state->renderer, 24, 24, 24, 255);
+  SDL_RenderFillRect(state->renderer, &map_rect);
+
+  float map_max_width = 4000.0f;
+  SDL_Rect player_rect;
+  player_rect.w = 8;
+  player_rect.h = 8;
+  SDL_Log("%.1f, %.1f", map->player_pos->x, map->player_pos->y);
+  player_rect.x = map_rect.w * (map->player_pos->x / map_max_width) +
+                  map_rect.x + map_rect.w / 2.0f - player_rect.w / 2.0f;
+  player_rect.y = map_rect.h * (map->player_pos->y / map_max_width) +
+                  map_rect.y + map_rect.h / 2.0f - player_rect.h / 2.0f;
+
+  SDL_SetRenderDrawColor(state->renderer, 200, 200, 200, 255);
+  SDL_RenderFillRect(state->renderer, &player_rect);
+}
