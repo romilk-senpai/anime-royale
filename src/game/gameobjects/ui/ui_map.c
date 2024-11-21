@@ -49,17 +49,6 @@ static void render(GameState *state, void *context) {
 
   float map_max_width = 8000.0f;
 
-  SDL_Rect player_rect;
-  player_rect.w = 4;
-  player_rect.h = 4;
-  player_rect.x = map_rect.w * (map->player_pos->x / map_max_width) +
-                  map_rect.x + map_rect.w / 2.0f - player_rect.w / 2.0f;
-  player_rect.y = map_rect.h * (map->player_pos->y / map_max_width) +
-                  map_rect.y + map_rect.h / 2.0f - player_rect.h / 2.0f;
-
-  SDL_SetRenderDrawColor(state->renderer, 20, 255, 25, 255);
-  SDL_RenderFillRect(state->renderer, &player_rect);
-
   for (size_t i = 0; i < map->level_layout->num_planets; i++) {
     Planet *p = map->level_layout->planets[i];
     SDL_Rect planet_rect;
@@ -73,4 +62,15 @@ static void render(GameState *state, void *context) {
     SDL_SetRenderDrawColor(state->renderer, 102, 51, 153, 255);
     SDL_RenderFillRect(state->renderer, &planet_rect);
   }
+
+  SDL_Rect player_rect;
+  player_rect.w = 4;
+  player_rect.h = 4;
+  player_rect.x = map_rect.w * (map->player_pos->x / map_max_width) +
+                  map_rect.x + map_rect.w / 2.0f - player_rect.w / 2.0f;
+  player_rect.y = map_rect.h * (map->player_pos->y / map_max_width) +
+                  map_rect.y + map_rect.h / 2.0f - player_rect.h / 2.0f;
+
+  SDL_SetRenderDrawColor(state->renderer, 20, 255, 25, 255);
+  SDL_RenderFillRect(state->renderer, &player_rect);
 }
