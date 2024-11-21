@@ -15,6 +15,19 @@ body {
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
+.controls {
+	display: flex;
+	width: 1280px;
+	margin: 24px auto;
+	justify-content: space-around;
+}
+
+.controls p {
+	color: white;
+	font-size: 24px;
+	font-family: "Noto Sans", serif;
+}
+
 #canvas {
 	margin: 0
 }
