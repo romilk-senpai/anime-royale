@@ -132,7 +132,6 @@ void process_input(GameState *state) {
 
     case SDL_WINDOWEVENT:
       if (e.window.event == SDL_WINDOWEVENT_RESIZED) {
-        // state->camera->viewbox = (Vector2){e.window.data1, e.window.data2};
         break;
       }
     case SDL_MOUSEMOTION:
@@ -143,19 +142,25 @@ void process_input(GameState *state) {
       switch (e.key.keysym.sym) {
       case SDLK_1:
         state->input->item_slot_input->item1 = 1;
+        break;
       case SDLK_2:
         state->input->item_slot_input->item2 = 1;
+        break;
       case SDLK_3:
         state->input->item_slot_input->item3 = 1;
+        break;
       case SDLK_4:
         state->input->item_slot_input->item4 = 1;
+        break;
       case SDLK_TAB:
         state->input->map = 1;
+        break;
       }
     case SDL_MOUSEBUTTONDOWN:
       if (e.button.button == SDL_BUTTON_LEFT) {
         state->input->mouse_down = 1;
       }
+      break;
     }
   }
 
