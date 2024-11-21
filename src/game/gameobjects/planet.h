@@ -9,7 +9,6 @@
 typedef struct {
   GameObject *go;
   SDL_Texture *planet_tex;
-  Vector2 position;
   Vector2 size;
 } Planet;
 
