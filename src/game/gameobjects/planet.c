@@ -2,6 +2,7 @@
 #include "../sdl_helper.h"
 #include "player.h"
 #include "vector2.h"
+#include <SDL2/SDL_render.h>
 
 Planet *planet_new(GameState *state, Vector2 position, Vector2 size) {
   Planet *planet = malloc(sizeof(Planet));
@@ -11,6 +12,7 @@ Planet *planet_new(GameState *state, Vector2 position, Vector2 size) {
   planet->go->position = position;
   planet->size = size;
   planet->planet_tex = create_sdl_texture(state->renderer, "assets/planet.png");
+  SDL_SetTextureColorMod(planet->planet_tex, 102, 51, 153);
   go->z_index = 1;
   go_pool_bind(state->go_pool, go);
   return planet;
@@ -23,7 +25,10 @@ static void render(GameState *state, void *context) {
   SDL_Rect rect;
   rect.w = planet->size.x;
   rect.h = planet->size.y;
-  rect.x = planet->go->position.x - rect.w / 2.0;
-  rect.y = planet->go->position.y - rect.h / 2.0;
+  Vector2 render_pos = world_to_screen_pos(
+      state->camera, (Vector2){planet->go->position.x - rect.w / 2.0,
+                               planet->go->position.y - rect.h / 2.0});
+  rect.x = render_pos.x;
+  rect.y = render_pos.y;
   SDL_RenderCopy(state->renderer, planet->planet_tex, NULL, &rect);
 }
