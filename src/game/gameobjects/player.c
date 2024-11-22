@@ -1,5 +1,6 @@
 #include "player.h"
 #include "../sdl_helper.h"
+#include "celestial_body.h"
 #include "ui/ui_map.h"
 #include "vector2.h"
 #include "weapons/auto_rifle.h"
@@ -23,6 +24,7 @@ Player *player_new(GameState *state) {
       go_create(go_pool_new_id(state->go_pool), player, update, render);
   player->go = go;
   go->z_index = 10;
+  go->position = (Vector2){1000, 1000};
 
   Pistol *pistol = pistol_new(state);
   Shotgun *shotgun = shotgun_new(state);
@@ -42,6 +44,7 @@ Player *player_new(GameState *state) {
   player->h_b_tex = create_sdl_texture(state->renderer, "assets/h_back.png");
 
   player->movement = vector2_zero();
+  player->celestial_body = celestial_body_new(&player->go->position, 45.0f);
 
   go_pool_bind(state->go_pool, go);
 
@@ -126,9 +129,4 @@ static void render(GameState *state, void *context) {
                    NULL, &c_rect, 0.0f, NULL,
                    player->look_dir.x >= 0 ? SDL_FLIP_NONE
                                            : SDL_FLIP_HORIZONTAL);
-  // SDL_RenderCopyEx(state->renderer,
-  //                  player->look_dir.y >= 0 ? player->h_f_tex :
-  //                  player->h_b_tex, NULL, &h_rect, 0.0f, NULL,
-  //                  player->look_dir.x >= 0 ? SDL_FLIP_NONE
-  //                                          : SDL_FLIP_HORIZONTAL);
 }

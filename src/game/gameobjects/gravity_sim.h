@@ -3,6 +3,7 @@
 
 #include "game.h"
 #include "level_layout.h"
+#include "player.h"
 #include "vector.h"
 
 typedef struct {
@@ -10,7 +11,8 @@ typedef struct {
   vector *sim_bodies;
 } GravitySim;
 
-GravitySim *gravity_sim_new(GameState *state, LevelLayout *layout);
+GravitySim *gravity_sim_new(GameState *state, Player *player,
+                            LevelLayout *layout);
 static void update(GameState *state, void *context);
 static void render(GameState *state, void *context);
 

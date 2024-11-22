@@ -17,6 +17,7 @@ typedef struct {
   UIMap *ui_map;
   Vector2 look_dir;
   Vector2 movement;
+  CelestialBody *celestial_body;
   SDL_Texture *c_f_tex;
   SDL_Texture *h_f_tex;
   SDL_Texture *c_b_tex;

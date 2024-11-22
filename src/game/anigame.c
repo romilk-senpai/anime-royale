@@ -16,7 +16,8 @@ AniGame *anigame_new(GameState *state) {
       inventory_ui_new(state, 4, anigame->player->weapon_inv);
   anigame->level_layout = level_layout_new(state);
   level_layout_fill_basic(anigame->level_layout, state);
-  anigame->gravity_sim = gravity_sim_new(state, anigame->level_layout);
+  anigame->gravity_sim =
+      gravity_sim_new(state, anigame->player, anigame->level_layout);
   anigame->ui_map =
       ui_map_new(state, &anigame->player->go->position, anigame->level_layout);
   anigame->player->inventory_ui = anigame->inventory_ui;

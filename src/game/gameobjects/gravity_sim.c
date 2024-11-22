@@ -8,7 +8,8 @@
 #include <SDL2/SDL_stdinc.h>
 #include <stdlib.h>
 
-GravitySim *gravity_sim_new(GameState *state, LevelLayout *layout) {
+GravitySim *gravity_sim_new(GameState *state, Player *player,
+                            LevelLayout *layout) {
   GravitySim *gravity_sim = malloc(sizeof(GravitySim));
   GameObject *go =
       go_create(go_pool_new_id(state->go_pool), gravity_sim, update, render);
@@ -19,6 +20,7 @@ GravitySim *gravity_sim_new(GameState *state, LevelLayout *layout) {
     vector_add(gravity_sim->sim_bodies, layout->planets[i]->celestial_body);
   }
   vector_add(gravity_sim->sim_bodies, layout->star->celestial_body);
+  //vector_add(gravity_sim->sim_bodies, player->celestial_body);
   go_pool_bind(state->go_pool, go);
   return gravity_sim;
 }
@@ -44,13 +46,13 @@ static void update(GameState *state, void *context) {
 
   for (size_t i = 0; i < sim->sim_bodies->size; i++) {
     bodies[i]->velocity.x +=
-        bodies[i]->acceleration.x * state->time->delta_time * 100;
+        bodies[i]->acceleration.x * state->time->delta_time * 10;
     bodies[i]->velocity.y +=
-        bodies[i]->acceleration.y * state->time->delta_time * 100;
+        bodies[i]->acceleration.y * state->time->delta_time * 10;
     bodies[i]->position->x +=
-        bodies[i]->velocity.x * state->time->delta_time * 100;
+        bodies[i]->velocity.x * state->time->delta_time * 10;
     bodies[i]->position->y +=
-        bodies[i]->velocity.y * state->time->delta_time * 100;
+        bodies[i]->velocity.y * state->time->delta_time * 10;
   }
 }
 
