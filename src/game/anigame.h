@@ -4,6 +4,7 @@
 #include "game.h"
 #include "gameobjects/bg_renderer.h"
 #include "gameobjects/cursor.h"
+#include "gameobjects/gravity_sim.h"
 #include "gameobjects/level_layout.h"
 #include "gameobjects/player.h"
 #include "gameobjects/ui/ui_inventory.h"
@@ -15,6 +16,7 @@ typedef struct {
   BGRenderer *bg_renderer;
   InventoryUI *inventory_ui;
   LevelLayout *level_layout;
+  GravitySim *gravity_sim;
   UIMap *ui_map;
 } AniGame;
 

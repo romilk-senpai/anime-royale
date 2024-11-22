@@ -1,5 +1,6 @@
 #include "planet.h"
 #include "../sdl_helper.h"
+#include "celestial_body.h"
 #include "player.h"
 #include "vector2.h"
 #include <SDL2/SDL_render.h>
@@ -12,6 +13,7 @@ Planet *planet_new(GameState *state, Vector2 position, Vector2 size) {
   planet->go->position = position;
   planet->size = size;
   planet->planet_tex = create_sdl_texture(state->renderer, "assets/planet.png");
+  planet->celestial_body = celestial_body_new(&planet->go->position, 45.0f);
   SDL_SetTextureColorMod(planet->planet_tex, 102, 51, 153);
   go->z_index = 1;
   go_pool_bind(state->go_pool, go);

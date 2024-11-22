@@ -10,6 +10,7 @@
 typedef struct {
   Planet **planets;
   int num_planets;
+  Planet *star;
 } LevelLayout;
 
 LevelLayout *level_layout_new(GameState *state);

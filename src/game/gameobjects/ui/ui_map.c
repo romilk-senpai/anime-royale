@@ -63,6 +63,18 @@ static void render(GameState *state, void *context) {
     SDL_RenderFillRect(state->renderer, &planet_rect);
   }
 
+  Planet *p = map->level_layout->star;
+  SDL_Rect star_rect;
+  star_rect.w = map_rect.w * (p->size.x / map_max_width);
+  star_rect.h = map_rect.h * (p->size.y / map_max_width);
+  star_rect.x = map_rect.w * (p->go->position.x / map_max_width) + map_rect.x +
+                map_rect.w / 2.0f - star_rect.w / 2.0f;
+  star_rect.y = map_rect.h * (p->go->position.y / map_max_width) + map_rect.y +
+                map_rect.h / 2.0f - star_rect.h / 2.0f;
+
+  SDL_SetRenderDrawColor(state->renderer, 255, 204, 0, 255);
+  SDL_RenderFillRect(state->renderer, &star_rect);
+
   SDL_Rect player_rect;
   player_rect.w = 4;
   player_rect.h = 4;
