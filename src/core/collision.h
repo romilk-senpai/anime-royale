@@ -17,14 +17,20 @@ typedef struct {
   Vector2 size;
 } RectCollider;
 
-typedef void (*on_collision)(struct GameState *, void *);
+typedef struct {
+  void *collider;
+  enum ColliderType col_type;
+} CollisionInfo;
+
+typedef void (*on_collision)(GameState *state, CollisionInfo *collision_info);
 
 typedef struct {
   void *collider;
   enum ColliderType col_type;
-  on_collision on_collision_func;
-  void *on_collision_ctx;
+  on_collision on_collision;
 } CollisionListener;
+
+void process_collision(CollisionListener *listener, CollisionInfo info);
 
 typedef struct {
   hash_map *circle_st_cols;

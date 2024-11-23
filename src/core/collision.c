@@ -3,6 +3,10 @@
 #include "map.h"
 #include <stdlib.h>
 
+void process_collision(CollisionListener *listener, CollisionInfo info) {
+
+}
+
 Collision *collision_new(GameState *state) {
   Collision *collision = malloc(sizeof(Collision));
   collision->listeners = hash_map_create(fnv1a_hash);
@@ -38,30 +42,42 @@ void collision_remove_listener(Collision *collision,
 }
 
 static void cmp_rect_rect_for_each(key_value_pair *kvp, void *context) {
-  RectCollider *l_col = (RectCollider *)context;
   RectCollider *other = (RectCollider *)kvp->value;
+  CollisionListener *listener = (CollisionListener *)context;
+  RectCollider *l_col = (RectCollider *)listener->collider;
   if (cmp_rect_rect(l_col, other)) {
+    CollisionInfo info = {l_col, RECT};
+    process_collision(listener, info);
   }
 }
 
 static void cmp_circle_rect_for_each(key_value_pair *kvp, void *context) {
   CircleCollider *other = (CircleCollider *)kvp->value;
-  RectCollider *l_col = (RectCollider *)context;
+  CollisionListener *listener = (CollisionListener *)context;
+  RectCollider *l_col = (RectCollider *)listener->collider;
   if (cmp_rect_circle(l_col, other)) {
+    CollisionInfo info = {l_col, RECT};
+    process_collision(listener, info);
   }
 }
 
 static void cmp_rect_circle_for_each(key_value_pair *kvp, void *context) {
   RectCollider *other = (RectCollider *)kvp->value;
-  CircleCollider *l_col = (CircleCollider *)kvp->value;
+  CollisionListener *listener = (CollisionListener *)context;
+  CircleCollider *l_col = (CircleCollider *)listener->collider;
   if (cmp_rect_circle(other, l_col)) {
+    CollisionInfo info = {l_col, RECT};
+    process_collision(listener, info);
   }
 }
 
 static void cmp_circle_circle_for_each(key_value_pair *kvp, void *context) {
-  CircleCollider *l_col = (CircleCollider *)context;
   CircleCollider *other = (CircleCollider *)kvp->value;
+  CollisionListener *listener = (CollisionListener *)context;
+  CircleCollider *l_col = (CircleCollider *)listener->collider;
   if (cmp_circle_circle(l_col, other)) {
+    CollisionInfo info = {l_col, RECT};
+    process_collision(listener, info);
   }
 }
 
@@ -71,14 +87,14 @@ static void listeners_for_each(key_value_pair *kvp, void *context) {
 
   if (listener->col_type == RECT) {
     hash_map_for_each(collision->rect_st_cols, cmp_rect_rect_for_each,
-                      listener->collider);
+                      listener);
     hash_map_for_each(collision->circle_st_cols, cmp_circle_rect_for_each,
-                      listener->collider);
+                      listener);
   } else {
     hash_map_for_each(collision->rect_st_cols, cmp_rect_circle_for_each,
-                      listener->collider);
+                      listener);
     hash_map_for_each(collision->circle_st_cols, cmp_circle_circle_for_each,
-                      listener->collider);
+                      listener);
   }
 }
 
