@@ -27,10 +27,10 @@ void ui_map_hide(UIMap *map, GameState *state) {
   go_pool_unbind(state->go_pool, map->go);
 }
 
-static void update(GameState *state, void *context) {}
+static void update(void *self, GameState *state) {}
 
-static void render(GameState *state, void *context) {
-  UIMap *map = (UIMap *)context;
+static void render(void *self, GameState *state) {
+  UIMap *map = (UIMap *)self;
   SDL_Rect map_rect_outer;
   map_rect_outer.w = 484;
   map_rect_outer.h = 484;

@@ -16,10 +16,11 @@ typedef struct {
   int isShowing;
 } UIMap;
 
-UIMap *ui_map_new(GameState *state, Vector2 *player_pos, LevelLayout *level_layout);
+UIMap *ui_map_new(GameState *state, Vector2 *player_pos,
+                  LevelLayout *level_layout);
 void ui_map_show(UIMap *map, GameState *state);
 void ui_map_hide(UIMap *map, GameState *state);
-static void update(GameState *state, void *context);
-static void render(GameState *state, void *context);
+static void update(void *self, GameState *state);
+static void render(void *self, GameState *state);
 
 #endif

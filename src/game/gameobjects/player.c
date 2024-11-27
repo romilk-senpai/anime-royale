@@ -51,8 +51,8 @@ Player *player_new(GameState *state) {
   return player;
 }
 
-static void update(GameState *state, void *context) {
-  Player *player = (Player *)context;
+static void update(void *self, GameState *state) {
+  Player *player = (Player *)self;
   player->movement =
       vector2_add(player->movement,
                   vector2_mul_scalar(state->input->movement,
@@ -103,8 +103,8 @@ static void update(GameState *state, void *context) {
   state->camera->position = player->go->position;
 }
 
-static void render(GameState *state, void *context) {
-  Player *player = (Player *)context;
+static void render(void *self, GameState *state) {
+  Player *player = (Player *)self;
   SDL_Rect c_rect;
   c_rect.w = 32 * 3;
   c_rect.h = 34 * 3;

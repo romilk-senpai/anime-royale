@@ -24,7 +24,7 @@ typedef struct {
 InventoryUI *inventory_ui_new(GameState *state, size_t slot_count,
                               Weapon **weapon_inv);
 void slot_inv_select(InventoryUI *ui, size_t item);
-static void update(GameState *state, void *context);
-static void render(GameState *state, void *context);
+static void update(void *self, GameState *state);
+static void render(void *self, GameState *state);
 
 #endif

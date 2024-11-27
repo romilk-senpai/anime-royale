@@ -25,8 +25,8 @@ BasicBullet *bullet_new(GameState *state, Vector2 position, Vector2 direction,
   return bullet;
 }
 
-static void update(GameState *state, void *context) {
-  BasicBullet *bullet = (BasicBullet *)context;
+static void update(void *self, GameState *state) {
+  BasicBullet *bullet = (BasicBullet *)self;
   if (state->time->time > bullet->destroy_time) {
     bullet_free(bullet, state);
     return;
@@ -37,8 +37,8 @@ static void update(GameState *state, void *context) {
                          BASIC_BULLET_SPEED * state->time->delta_time));
 }
 
-static void render(GameState *state, void *context) {
-  BasicBullet *bullet = (BasicBullet *)context;
+static void render(void *self, GameState *state) {
+  BasicBullet *bullet = (BasicBullet *)self;
   SDL_Rect rect;
   rect.w = 15;
   rect.h = 15;

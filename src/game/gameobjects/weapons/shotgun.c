@@ -27,8 +27,8 @@ Shotgun *shotgun_new(GameState *state) {
   return shotgun;
 }
 
-static void fire(GameState *state, void *context) {
-  Shotgun *shotgun = (Shotgun *)context;
+static void fire(void *self, GameState *state) {
+  Shotgun *shotgun = (Shotgun *)self;
 
   if (state->time->time - shotgun->last_shot_time < 1.0f / RADUN_FIRE_RATE) {
     return;
@@ -50,6 +50,6 @@ static void fire(GameState *state, void *context) {
   shotgun->last_shot_time = state->time->time;
 }
 
-static void update(GameState *state, void *context) {}
+static void update(void *self, GameState *state) {}
 
-static void render(GameState *state, void *context) {}
+static void render(void *self, GameState *state) {}

@@ -23,8 +23,8 @@ AutoRifle *auto_rifle_new(GameState *state) {
   return a_rifle;
 }
 
-static void fire(GameState *state, void *context) {
-  AutoRifle *a_rifle = (AutoRifle *)context;
+static void fire(void *self, GameState *state) {
+  AutoRifle *a_rifle = (AutoRifle *)self;
 
   if (state->time->time - a_rifle->last_shot_time <
       1.0f / AUTO_RIFLE_FIRE_RATE) {
@@ -41,6 +41,6 @@ static void fire(GameState *state, void *context) {
   a_rifle->last_shot_time = state->time->time;
 }
 
-static void update(GameState *state, void *context) {}
+static void update(void *self, GameState *state) {}
 
-static void render(GameState *state, void *context) {}
+static void render(void *self, GameState *state) {}

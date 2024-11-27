@@ -27,8 +27,8 @@ RadGun *radgun_new(GameState *state) {
   return radgun;
 }
 
-static void fire(GameState *state, void *context) {
-  RadGun *radgun = (RadGun *)context;
+static void fire(void *self, GameState *state) {
+  RadGun *radgun = (RadGun *)self;
   if (state->time->time - radgun->last_shot_time < 1.0f / RADGUN_FIRE_RATE) {
     return;
   }
@@ -48,6 +48,6 @@ static void fire(GameState *state, void *context) {
   radgun->last_shot_time = state->time->time;
 }
 
-static void update(GameState *state, void *context) {}
+static void update(void *self, GameState *state) {}
 
-static void render(GameState *state, void *context) {}
+static void render(void *self, GameState *state) {}

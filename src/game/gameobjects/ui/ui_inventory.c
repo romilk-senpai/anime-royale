@@ -37,10 +37,10 @@ void slot_inv_select(InventoryUI *ui, size_t item) {
   ui->selected_item = item;
 }
 
-static void update(GameState *state, void *context) {}
+static void update(void *self, GameState *state) {}
 
-static void render(GameState *state, void *context) {
-  InventoryUI *ui = (InventoryUI *)context;
+static void render(void *self, GameState *state) {
+  InventoryUI *ui = (InventoryUI *)self;
   int spacing = 14;
   int item_width = 64;
   int item_height = 64;

@@ -25,7 +25,7 @@ typedef struct {
 } Player;
 
 Player *player_new(GameState *state);
-static void update(GameState *state, void *context);
-static void render(GameState *state, void *context);
+static void update(void *self, GameState *state);
+static void render(void *self, GameState *state);
 
 #endif

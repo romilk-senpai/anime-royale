@@ -22,8 +22,8 @@ typedef struct {
 
 UIButton *button_new(GameState *state, Vector2 size, char *bg_sprite_path,
                      char *text, TTF_Font *font, SDL_Color text_color);
-static void update(GameState *state, void *context);
-static void render(GameState *state, void *context);
+static void update(void *self, GameState *state);
+static void render(void *self, GameState *state);
 void free_button(UIButton *button, GameState *state);
 
 #endif

@@ -26,8 +26,8 @@ UIButton *button_new(GameState *state, Vector2 size, char *bg_sprite_path,
   return button;
 }
 
-static void update(GameState *state, void *context) {
-  UIButton *button = (UIButton *)context;
+static void update(void *self, GameState *state) {
+  UIButton *button = (UIButton *)self;
   Vector2 mouse_pos = state->input->mouse_pos;
   button->hovered = mouse_pos.x > button->go->position.y &&
                     mouse_pos.x < button->go->position.x + button->size.x &&
@@ -40,8 +40,8 @@ static void update(GameState *state, void *context) {
   }
 }
 
-static void render(GameState *state, void *context) {
-  UIButton *button = (UIButton *)context;
+static void render(void *self, GameState *state) {
+  UIButton *button = (UIButton *)self;
   if (button->hovered) {
     SDL_SetTextureAlphaMod(button->bg_tex, 200);
   } else {

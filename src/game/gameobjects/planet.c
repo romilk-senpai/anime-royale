@@ -20,10 +20,10 @@ Planet *planet_new(GameState *state, Vector2 position, Vector2 size) {
   return planet;
 }
 
-static void update(GameState *state, void *context) {}
+static void update(void *self, GameState *state) {}
 
-static void render(GameState *state, void *context) {
-  Planet *planet = (Planet *)context;
+static void render(void *self, GameState *state) {
+  Planet *planet = (Planet *)self;
   SDL_Rect rect;
   rect.w = planet->size.x;
   rect.h = planet->size.y;

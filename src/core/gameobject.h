@@ -6,8 +6,8 @@
 
 struct GameState;
 
-typedef void (*update_func)(void *self, struct GameState *state, void *context);
-typedef void (*render_func)(void *self, struct GameState *state, void *context);
+typedef void (*update_func)(void *self, struct GameState *state);
+typedef void (*render_func)(void *self, struct GameState *state);
 
 typedef struct {
   uint32_t instance_id;

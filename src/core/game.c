@@ -186,7 +186,7 @@ void update_go_map(key_value_pair *kvp, void *context) {
   GameState *state = (GameState *)context;
   uint32_t id = *(uint32_t *)kvp->key;
   GameObject *go = (GameObject *)kvp->value;
-  go->update(state, go->binding);
+  go->update(go->binding, state);
 }
 
 void update_game(GameState *state) {
@@ -196,7 +196,7 @@ void update_game(GameState *state) {
 void render_go_map(key_value_pair *kvp, void *context) {
   GameState *state = (GameState *)context;
   GameObject *go = (GameObject *)kvp->value;
-  go->render(state, go->binding);
+  go->render(go->binding, state);
 }
 
 void render_create_min_heap(key_value_pair *kvp, void *context) {
@@ -212,7 +212,7 @@ void render_game(GameState *state) {
   hash_map_for_each(state->go_pool->go_map, render_create_min_heap, heap);
   while (heap->v->size > 0) {
     GameObject *go = min_heap_remove_min(heap);
-    go->render(state, go->binding);
+    go->render(go->binding, state);
   }
 
   min_heap_free(heap);

@@ -5,7 +5,7 @@
 #include "gameobject.h"
 #include <SDL2/SDL_render.h>
 
-typedef void (*fire_func)(GameState *, void *);
+typedef void (*fire_func)(void *self, GameState *state);
 
 typedef struct {
   GameObject *go;

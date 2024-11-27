@@ -25,8 +25,8 @@ GravitySim *gravity_sim_new(GameState *state, Player *player,
   return gravity_sim;
 }
 
-static void update(GameState *state, void *context) {
-  GravitySim *sim = (GravitySim *)context;
+static void update(void *self, GameState *state) {
+  GravitySim *sim = (GravitySim *)self;
   CelestialBody **bodies = (CelestialBody **)sim->sim_bodies->data;
   for (size_t i = 0; i < sim->sim_bodies->size; i++) {
     bodies[i]->acceleration = vector2_zero();
@@ -56,4 +56,4 @@ static void update(GameState *state, void *context) {
   }
 }
 
-static void render(GameState *state, void *context) {}
+static void render(void *self, GameState *state) {}

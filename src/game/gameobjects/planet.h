@@ -15,7 +15,7 @@ typedef struct {
 } Planet;
 
 Planet *planet_new(GameState *state, Vector2 position, Vector2 size);
-static void update(GameState *state, void *context);
-static void render(GameState *state, void *context);
+static void update(void *self, GameState *state);
+static void render(void *self, GameState *state);
 
 #endif

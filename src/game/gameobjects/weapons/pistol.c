@@ -28,8 +28,8 @@ Pistol *pistol_new(GameState *state) {
   return pistol;
 }
 
-static void fire(GameState *state, void *context) {
-  Pistol *pistol = (Pistol *)context;
+static void fire(void *self, GameState *state) {
+  Pistol *pistol = (Pistol *)self;
 
   if (state->time->time - pistol->last_shot_time < 1.0f / PISTOL_FIRE_RATE) {
     return;
@@ -45,6 +45,6 @@ static void fire(GameState *state, void *context) {
   pistol->last_shot_time = state->time->time;
 }
 
-static void update(GameState *state, void *context) {}
+static void update(void *self, GameState *state) {}
 
-static void render(GameState *state, void *context) {}
+static void render(void *self, GameState *state) {}

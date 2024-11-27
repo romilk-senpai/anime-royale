@@ -21,13 +21,13 @@ Cursor *cursor_new(GameState *state) {
   return cursor;
 }
 
-static void update(GameState *state, void *context) {
-  Cursor *c = (Cursor *)context;
+static void update(void *self, GameState *state) {
+  Cursor *c = (Cursor *)self;
   c->go->position = state->input->mouse_pos;
 }
 
-static void render(GameState *state, void *context) {
-  Cursor *cursor = (Cursor *)context;
+static void render(void *self, GameState *state) {
+  Cursor *cursor = (Cursor *)self;
   SDL_Rect rect;
   rect.w = 50;
   rect.h = 50;

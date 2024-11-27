@@ -15,9 +15,8 @@ typedef struct {
 } Shotgun;
 
 Shotgun *shotgun_new(GameState *state);
-static void fire(GameState *state, void *context);
-static void update(GameState *state, void *context);
-static void render(GameState *state, void *context);
-
+static void fire(void *self, GameState *state);
+static void update(void *self, GameState *state);
+static void render(void *self, GameState *state);
 
 #endif

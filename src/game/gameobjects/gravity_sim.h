@@ -13,7 +13,7 @@ typedef struct {
 
 GravitySim *gravity_sim_new(GameState *state, Player *player,
                             LevelLayout *layout);
-static void update(GameState *state, void *context);
-static void render(GameState *state, void *context);
+static void update(void *self, GameState *state);
+static void render(void *self, GameState *state);
 
 #endif

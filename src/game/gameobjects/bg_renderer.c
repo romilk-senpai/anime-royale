@@ -24,10 +24,10 @@ BGRenderer *bg_renderer_new(GameState *state) {
   return bg_renderer;
 }
 
-static void update(GameState *state, void *context) {}
+static void update(void *self, GameState *state) {}
 
-static void render(GameState *state, void *context) {
-  BGRenderer *bg_renderer = (BGRenderer *)context;
+static void render(void *self, GameState *state) {
+  BGRenderer *bg_renderer = (BGRenderer *)self;
 
   int bg_wdith = 640;
   int bg_height = 640;
