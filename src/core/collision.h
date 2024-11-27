@@ -22,11 +22,12 @@ typedef struct {
   enum ColliderType col_type;
 } CollisionInfo;
 
-typedef void (*on_collision)(GameState *state, CollisionInfo *collision_info);
+typedef void (*on_collision)(CollisionInfo collision_info, void *context);
 
 typedef struct {
   void *collider;
   enum ColliderType col_type;
+  void *collision_context;
   on_collision on_collision;
 } CollisionListener;
 

@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 void process_collision(CollisionListener *listener, CollisionInfo info) {
-
+  listener->on_collision(info, listener->collision_context);
 }
 
 Collision *collision_new(GameState *state) {

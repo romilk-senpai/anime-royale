@@ -46,14 +46,10 @@ void init_window(GameState *state, int window_width, int window_height) {
   SDL_Init(SDL_INIT_VIDEO);
   SDL_Window *window = SDL_CreateWindow("Anime Royale", 0, 0, window_width,
                                         window_height, SDL_WINDOW_SHOWN);
-
-#ifdef __EMSCRIPTEN__
   SDL_Renderer *renderer =
       SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
+#ifdef __EMSCRIPTEN__
   emscripten_set_canvas_size(window_width, window_height);
-#else
-  SDL_Renderer *renderer =
-      SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 #endif
   SDL_RenderSetLogicalSize(renderer, LOGICAL_WIDTH, LOGICAL_HEIGHT);
 
