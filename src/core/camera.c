@@ -1,13 +1,8 @@
 #include "camera.h"
 #include "vector2.h"
-#include <stdlib.h>
 
-Camera *camera_new(Vector2 screen_size) {
-  Camera *camera = malloc(sizeof(Camera));
-
-  *camera = (Camera){screen_size, vector2_zero()};
-
-  return camera;
+Camera camera_create(Vector2 screen_size) {
+  return (Camera){screen_size, vector2_zero()};
 }
 
 Vector2 screen_to_world_pos(Camera *camera, Vector2 screen_pos) {

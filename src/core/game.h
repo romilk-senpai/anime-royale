@@ -12,12 +12,11 @@
 typedef struct GameState {
   SDL_Window *window;
   SDL_Renderer *renderer;
-  Camera *camera;
-  int quit;
+  Camera camera;
   GameController *game_controller;
-  Time *time;
-  Input *input;
-  GOPool *go_pool;
+  Time time;
+  Input input;
+  GOPool go_pool;
 } GameState;
 
 GameState *init_game(GameController *game_controller);
@@ -30,10 +29,8 @@ void game_run(void *state_ptr);
 void game_run(GameState *state);
 #endif
 
-void handle_time(GameState *state);
-void process_input(GameState *state);
-void update_game(GameState *state);
-void render_game(GameState *state);
-void quit_game(GameState *state);
+static void update_game(GameState *state);
+static void render_game(GameState *state);
+static void quit_game(GameState *state);
 
 #endif

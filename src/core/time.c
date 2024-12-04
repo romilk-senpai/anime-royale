@@ -1,8 +1,10 @@
 #include "time.h"
-#include <stdlib.h>
+#include <SDL2/SDL_timer.h>
 
-Time *time_new() {
-  Time *t = malloc(sizeof(Time));
-  *t = (Time){0.0, 0.0};
-  return t;
+void time_update(Time *self) {
+  Uint32 current_time = SDL_GetTicks();
+  float delta_time = (current_time - self->last_time) / 1000.0f;
+  self->time = current_time / 1000.0f;
+  self->delta_time = delta_time;
+  self->last_time = current_time;
 }

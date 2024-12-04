@@ -9,7 +9,7 @@ typedef struct {
   uint32_t next_id;
 } GOPool;
 
-GOPool *go_pool_new();
+GOPool go_pool_create();
 uint32_t go_pool_new_id(GOPool *go_pool);
 void go_pool_bind(GOPool *go_pool, GameObject *go);
 void go_pool_unbind(GOPool *go_pool, GameObject *go);
