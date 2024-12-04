@@ -97,7 +97,7 @@ static void update(void *self, GameState *state) {
   player->weapon->go->position = player->go->position;
 
   if (state->input->mouse_held == 1) {
-    player->weapon->fire(state, player->weapon->binding);
+    player->weapon->fire(player->weapon->binding, state);
   }
 
   state->camera->position = player->go->position;
