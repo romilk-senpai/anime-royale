@@ -1,25 +1,8 @@
 #include "game.h"
-#include "camera.h"
-#include "gameobject.h"
 #include "go_min_heap.h"
-#include "go_pool.h"
-#include "map.h"
-#include "vector.h"
-#include "vector2.h"
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_events.h>
 #include <SDL2/SDL_image.h>
-#include <SDL2/SDL_keycode.h>
-#include <SDL2/SDL_log.h>
-#include <SDL2/SDL_mouse.h>
-#include <SDL2/SDL_render.h>
-#include <SDL2/SDL_stdinc.h>
 #include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_video.h>
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 #ifdef __EMSCRIPTEN__
 #include "emscripten.h"

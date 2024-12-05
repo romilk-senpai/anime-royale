@@ -23,4 +23,4 @@ static uint32_t fnv1a_hash(void *val) {
   }
   return hash;
 }
-#endif // !HASH_FUNCS_H
+#endif

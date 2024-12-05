@@ -1,5 +1,4 @@
 #include "input.h"
-#include "vector2.h"
 #include <stdlib.h>
 
 Input *input_new() {

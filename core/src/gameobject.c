@@ -1,5 +1,4 @@
 #include "gameobject.h"
-#include <stdint.h>
 #include <stdlib.h>
 
 GameObject *go_create(uint32_t instance_id, void *binding, update_func update,

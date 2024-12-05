@@ -1,9 +1,7 @@
 #include "go_pool.h"
-#include "gameobject.h"
-#include <stdint.h>
+#include "hash.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <hash.h>
 
 GOPool *go_pool_new() {
   GOPool *go_manager = malloc(sizeof(GOPool));

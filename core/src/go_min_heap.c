@@ -1,7 +1,4 @@
 #include "go_min_heap.h"
-#include "gameobject.h"
-#include "vector.h"
-#include <stdio.h>
 #include <stdlib.h>
 
 const size_t MIN_HEAP_INITIAL_CAPACITY = 10;

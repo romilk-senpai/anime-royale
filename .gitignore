@@ -1,3 +1,6 @@
+/.cache/
 /SDL2*/
 /librcds*/
 /build*/
+
+compile_commands.json

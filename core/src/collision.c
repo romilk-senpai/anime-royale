@@ -1,6 +1,5 @@
 #include "collision.h"
 #include "hash.h"
-#include "map.h"
 #include <stdlib.h>
 
 void process_collision(CollisionListener *listener, CollisionInfo info) {

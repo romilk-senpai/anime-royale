@@ -1,5 +1,4 @@
 #include "camera.h"
-#include "vector2.h"
 #include <stdlib.h>
 
 Camera *camera_new(Vector2 screen_size) {

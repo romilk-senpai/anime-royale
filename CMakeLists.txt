@@ -1,8 +1,9 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.13)
 project(anime-royale C)
 
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
 # rcds
 if(EMSCRIPTEN)
@@ -14,17 +15,10 @@ include_directories(${RCDS_PATH}/include)
 link_directories(${RCDS_PATH}/lib)
 
 # Core library
-file(GLOB_RECURSE CORE_SOURCES "src/core/*.c")
-add_library(core STATIC ${CORE_SOURCES})
+add_subdirectory(core)
 
-target_include_directories(core PUBLIC src/core)
-
-file(GLOB_RECURSE GAME_SOURCES "src/game/*.c")
-
-add_executable(anime-royale ${GAME_SOURCES})
-
-target_include_directories(${PROJECT_NAME} PUBLIC src/game)
-target_include_directories(${PROJECT_NAME} PUBLIC src/core)
+file(GLOB_RECURSE GAME_SOURCES "game/*.c")
+add_executable(${PROJECT_NAME} ${GAME_SOURCES})
 
 if(EMSCRIPTEN)
     set(CMAKE_C_COMPILER emcc)
@@ -49,6 +43,5 @@ if(EMSCRIPTEN)
     target_link_options(${PROJECT_NAME} PRIVATE --preload-file assets)
     target_link_libraries(${PROJECT_NAME} core rcds)
 else()
-    target_link_libraries(core rcds)
     target_link_libraries(${PROJECT_NAME} core SDL2 SDL2_image SDL2_ttf m rcds)
 endif()
