@@ -5,6 +5,10 @@ set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
+if(EMSCRIPTEN)
+    set(CMAKE_C_COMPILER emcc)
+endif()
+
 # rcds
 if(EMSCRIPTEN)
     set(RCDS_PATH ${CMAKE_SOURCE_DIR}/librcds-wasm)
@@ -20,8 +24,10 @@ add_subdirectory(core)
 file(GLOB_RECURSE GAME_SOURCES "game/*.c")
 add_executable(${PROJECT_NAME} ${GAME_SOURCES})
 
+target_include_directories(${PROJECT_NAME} PUBLIC game)
+target_include_directories(${PROJECT_NAME} PUBLIC core)
+
 if(EMSCRIPTEN)
-    set(CMAKE_C_COMPILER emcc)
     add_compile_definitions("__EMSCRIPTEN__")
     target_link_options(${PROJECT_NAME} PRIVATE
         # "--bind"
@@ -43,5 +49,5 @@ if(EMSCRIPTEN)
     target_link_options(${PROJECT_NAME} PRIVATE --preload-file assets)
     target_link_libraries(${PROJECT_NAME} core rcds)
 else()
-    target_link_libraries(${PROJECT_NAME} core SDL2 SDL2_image SDL2_ttf m rcds)
+    target_link_libraries(${PROJECT_NAME} core rcds SDL2 SDL2_image SDL2_ttf m)
 endif()
