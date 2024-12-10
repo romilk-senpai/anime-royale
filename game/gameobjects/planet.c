@@ -28,7 +28,7 @@ static void render(void *self, GameState *state) {
   rect.w = planet->size.x;
   rect.h = planet->size.y;
   Vector2 render_pos = world_to_screen_pos(
-      state->camera, (Vector2){planet->go->position.x - rect.w / 2.0,
+      &state->camera, (Vector2){planet->go->position.x - rect.w / 2.0,
                                planet->go->position.y - rect.h / 2.0});
   rect.x = render_pos.x;
   rect.y = render_pos.y;

@@ -29,13 +29,13 @@ RadGun *radgun_new(GameState *state) {
 
 static void fire(void *self, GameState *state) {
   RadGun *radgun = (RadGun *)self;
-  if (state->time->time - radgun->last_shot_time < 1.0f / RADGUN_FIRE_RATE) {
+  if (state->time.time - radgun->last_shot_time < 1.0f / RADGUN_FIRE_RATE) {
     return;
   }
 
   Vector2 mouse_forward = vector2_normalize(
-      vector2_sub(state->input->mouse_pos,
-                  world_to_screen_pos(state->camera, radgun->go->position)));
+      vector2_sub(state->input.mouse_pos,
+                  world_to_screen_pos(&state->camera, radgun->go->position)));
 
   float angle_step = (2 * PI) / NUM_DIRECTIONS;
 
@@ -45,7 +45,7 @@ static void fire(void *self, GameState *state) {
     BasicBullet *bullet = bullet_new(state, radgun->go->position, dir, 0.35f);
   }
 
-  radgun->last_shot_time = state->time->time;
+  radgun->last_shot_time = state->time.time;
 }
 
 static void update(void *self, GameState *state) {}

@@ -16,7 +16,7 @@ MainMenu *main_menu_new(GameState *state) {
   }
   Vector2 button_size = {240, 45};
   Vector2 center_offset =
-      vector2_sub(vector2_mul_scalar(state->camera->viewbox, 0.5f),
+      vector2_sub(vector2_mul_scalar(state->camera.viewbox, 0.5f),
                   vector2_mul_scalar(button_size, 0.5f));
   main_menu->start_game_button =
       button_new(state, button_size, "assets/menu-button.png", "Start Game",

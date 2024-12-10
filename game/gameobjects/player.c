@@ -55,10 +55,10 @@ static void update(void *self, GameState *state) {
   Player *player = (Player *)self;
   player->movement =
       vector2_add(player->movement,
-                  vector2_mul_scalar(state->input->movement,
-                                     ACCELERATION * state->time->delta_time));
+                  vector2_mul_scalar(state->input.movement,
+                                     ACCELERATION * state->time.delta_time));
   player->movement = vector2_mul_scalar(player->movement,
-                                        pow(FRICTION, state->time->delta_time));
+                                        pow(FRICTION, state->time.delta_time));
   float speed = vector2_magnitude(player->movement);
   if (speed > MAX_SPEED) {
     player->movement.x = (player->movement.x / speed) * MAX_SPEED;
@@ -66,24 +66,24 @@ static void update(void *self, GameState *state) {
   }
 
   Vector2 movement =
-      vector2_mul_scalar(player->movement, state->time->delta_time);
+      vector2_mul_scalar(player->movement, state->time.delta_time);
   player->go->position = vector2_add(player->go->position, movement);
 
-  if (state->input->item_slot_input->item1) {
+  if (state->input.item_slot_input.item1) {
     player->weapon = player->weapon_inv[0];
     slot_inv_select(player->inventory_ui, 0);
-  } else if (state->input->item_slot_input->item2) {
+  } else if (state->input.item_slot_input.item2) {
     player->weapon = player->weapon_inv[1];
     slot_inv_select(player->inventory_ui, 1);
-  } else if (state->input->item_slot_input->item3) {
+  } else if (state->input.item_slot_input.item3) {
     player->weapon = player->weapon_inv[2];
     slot_inv_select(player->inventory_ui, 2);
-  } else if (state->input->item_slot_input->item4) {
+  } else if (state->input.item_slot_input.item4) {
     player->weapon = player->weapon_inv[3];
     slot_inv_select(player->inventory_ui, 3);
   }
 
-  if (state->input->map) {
+  if (state->input.map) {
     if (player->ui_map->isShowing)
       ui_map_hide(player->ui_map, state);
     else
@@ -91,16 +91,16 @@ static void update(void *self, GameState *state) {
   }
 
   player->look_dir = vector2_normalize(
-      vector2_sub(state->input->mouse_pos,
-                  world_to_screen_pos(state->camera, player->go->position)));
+      vector2_sub(state->input.mouse_pos,
+                  world_to_screen_pos(&state->camera, player->go->position)));
 
   player->weapon->go->position = player->go->position;
 
-  if (state->input->mouse_held == 1) {
+  if (state->input.mouse_held == 1) {
     player->weapon->fire(player->weapon->binding, state);
   }
 
-  state->camera->position = player->go->position;
+  state->camera.position = player->go->position;
 }
 
 static void render(void *self, GameState *state) {
@@ -110,7 +110,7 @@ static void render(void *self, GameState *state) {
   c_rect.h = 34 * 3;
 
   Vector2 render_pos = world_to_screen_pos(
-      state->camera, (Vector2){player->go->position.x - c_rect.w / 2.0,
+      &state->camera, (Vector2){player->go->position.x - c_rect.w / 2.0,
                                player->go->position.y - c_rect.h / 2.0});
 
   c_rect.x = render_pos.x;

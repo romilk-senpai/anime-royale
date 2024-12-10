@@ -45,8 +45,8 @@ static void render(void *self, GameState *state) {
   int item_width = 64;
   int item_height = 64;
   int total_width = ui->slot_count * (item_width + spacing) - spacing;
-  int start_x = (state->camera->viewbox.x - total_width) / 2.0f;
-  int start_y = state->camera->viewbox.y - item_height - 24;
+  int start_x = (state->camera.viewbox.x - total_width) / 2.0f;
+  int start_y = state->camera.viewbox.y - item_height - 24;
   for (size_t i = 0; i < ui->slot_count; i++) {
     InventorySlotUI *slot = ui->slots + i;
     SDL_Rect bg_rect = {start_x + i * (item_width + spacing), start_y,

@@ -32,15 +32,15 @@ static void render(void *self, GameState *state) {
   int bg_wdith = 640;
   int bg_height = 640;
 
-  Vector2 world_zero = screen_to_world_pos(state->camera, vector2_zero());
+  Vector2 world_zero = screen_to_world_pos(&state->camera, vector2_zero());
   Vector2 bg_offset = world_to_screen_pos(
-      state->camera, (Vector2){floor(world_zero.x / bg_wdith) * bg_wdith,
+      &state->camera, (Vector2){floor(world_zero.x / bg_wdith) * bg_wdith,
                                floor(world_zero.y / bg_height) * bg_height});
   int render_x = bg_offset.x;
   int render_y = bg_offset.y;
 
-  while (render_x < state->camera->viewbox.x) {
-    while (render_y < state->camera->viewbox.y) {
+  while (render_x < state->camera.viewbox.x) {
+    while (render_y < state->camera.viewbox.y) {
       SDL_Rect rect;
       rect.w = bg_wdith;
       rect.h = bg_height;

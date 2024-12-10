@@ -31,18 +31,18 @@ Pistol *pistol_new(GameState *state) {
 static void fire(void *self, GameState *state) {
   Pistol *pistol = (Pistol *)self;
 
-  if (state->time->time - pistol->last_shot_time < 1.0f / PISTOL_FIRE_RATE) {
+  if (state->time.time - pistol->last_shot_time < 1.0f / PISTOL_FIRE_RATE) {
     return;
   }
 
   Vector2 direction = vector2_normalize(
-      vector2_sub(state->input->mouse_pos,
-                  world_to_screen_pos(state->camera, pistol->go->position)));
+      vector2_sub(state->input.mouse_pos,
+                  world_to_screen_pos(&state->camera, pistol->go->position)));
 
   BasicBullet *bullet =
       bullet_new(state, pistol->go->position, direction, 0.5f);
 
-  pistol->last_shot_time = state->time->time;
+  pistol->last_shot_time = state->time.time;
 }
 
 static void update(void *self, GameState *state) {}

@@ -30,13 +30,13 @@ Shotgun *shotgun_new(GameState *state) {
 static void fire(void *self, GameState *state) {
   Shotgun *shotgun = (Shotgun *)self;
 
-  if (state->time->time - shotgun->last_shot_time < 1.0f / RADUN_FIRE_RATE) {
+  if (state->time.time - shotgun->last_shot_time < 1.0f / RADUN_FIRE_RATE) {
     return;
   }
 
   Vector2 mouse_forward = vector2_normalize(
-      vector2_sub(state->input->mouse_pos,
-                  world_to_screen_pos(state->camera, shotgun->go->position)));
+      vector2_sub(state->input.mouse_pos,
+                  world_to_screen_pos(&state->camera, shotgun->go->position)));
   Vector2 mouse_left = vector2_rotate(mouse_forward, 30.0f);
   Vector2 mouse_right = vector2_rotate(mouse_forward, -30.0f);
 
@@ -47,7 +47,7 @@ static void fire(void *self, GameState *state) {
   BasicBullet *bullet_l =
       bullet_new(state, shotgun->go->position, mouse_right, 0.5f);
 
-  shotgun->last_shot_time = state->time->time;
+  shotgun->last_shot_time = state->time.time;
 }
 
 static void update(void *self, GameState *state) {}

@@ -1,5 +1,7 @@
 #include "game.h"
 #include "go_min_heap.h"
+#include "input.h"
+#include "time.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
@@ -12,10 +14,10 @@ const int LOGICAL_WIDTH = 1280;
 const int LOGICAL_HEIGHT = 720;
 
 GameState *init_game(GameController *game_controller) {
-  Time *time = time_new();
-  Input *input = input_new();
+  Time time = {};
+  Input input = {};
   GOPool *go_pool = go_pool_new();
-  Camera *camera = camera_new((Vector2){LOGICAL_WIDTH, LOGICAL_HEIGHT});
+  Camera camera = {LOGICAL_WIDTH, LOGICAL_HEIGHT};
 
   GameState *state = malloc(sizeof(GameState));
 
@@ -45,8 +47,10 @@ void init_window(GameState *state, int window_width, int window_height) {
 
 int main_loop(GameState *state) {
   handle_time(state);
-  process_input(state);
-  if (state->quit == 1) {
+  handle_input(state);
+
+  if (state->input.quit) {
+    quit_game(state);
     return 0;
   }
 
@@ -88,82 +92,9 @@ void game_run(GameState *state) {
 }
 #endif
 
-void handle_time(GameState *state) {
-  Uint32 current_time = SDL_GetTicks();
-  float delta_time = (current_time - state->time->last_time) / 1000.0f;
-  state->time->time = current_time / 1000.0f;
-  state->time->delta_time = delta_time;
-  state->time->last_time = current_time;
-}
+void handle_time(GameState *state) { time_handle(&state->time); }
 
-void process_input(GameState *state) {
-  state->input->mouse_held = 0;
-  state->input->mouse_down = 0;
-  state->input->map = 0;
-  *state->input->item_slot_input = (ItemSoltInput){0, 0, 0, 0};
-
-  SDL_Event e;
-  while (SDL_PollEvent(&e) != 0) {
-    switch (e.type) {
-    case SDL_QUIT:
-      state->quit = 1;
-      return;
-
-    case SDL_WINDOWEVENT:
-      if (e.window.event == SDL_WINDOWEVENT_RESIZED) {
-        break;
-      }
-    case SDL_MOUSEMOTION:
-      state->input->mouse_pos = (Vector2){e.motion.x, e.motion.y};
-      break;
-
-    case SDL_KEYDOWN:
-      switch (e.key.keysym.sym) {
-      case SDLK_1:
-        state->input->item_slot_input->item1 = 1;
-        break;
-      case SDLK_2:
-        state->input->item_slot_input->item2 = 1;
-        break;
-      case SDLK_3:
-        state->input->item_slot_input->item3 = 1;
-        break;
-      case SDLK_4:
-        state->input->item_slot_input->item4 = 1;
-        break;
-      case SDLK_TAB:
-        state->input->map = 1;
-        break;
-      }
-    case SDL_MOUSEBUTTONDOWN:
-      if (e.button.button == SDL_BUTTON_LEFT) {
-        state->input->mouse_down = 1;
-      }
-      break;
-    }
-  }
-
-  const Uint8 *keystate = SDL_GetKeyboardState(NULL);
-  Vector2 in_move = vector2_zero();
-  if (keystate[SDL_SCANCODE_W]) {
-    in_move.y--;
-  }
-  if (keystate[SDL_SCANCODE_S]) {
-    in_move.y++;
-  }
-  if (keystate[SDL_SCANCODE_A]) {
-    in_move.x--;
-  }
-  if (keystate[SDL_SCANCODE_D]) {
-    in_move.x++;
-  }
-
-  int mouses_x, mouses_y;
-  Uint32 mousestate = SDL_GetRelativeMouseState(&mouses_x, &mouses_y);
-  state->input->mouse_held = mousestate & SDL_BUTTON(SDL_BUTTON_LEFT);
-  // state->input->mouse_pos = (Vector2){mouse_x, mouse_y};
-  state->input->movement = vector2_normalize(in_move);
-}
+void handle_input(GameState *state) { input_handle(&state->input); }
 
 void update_go_map(key_value_pair *kvp, void *context) {
   GameState *state = (GameState *)context;

@@ -46,13 +46,13 @@ static void update(void *self, GameState *state) {
 
   for (size_t i = 0; i < sim->sim_bodies->size; i++) {
     bodies[i]->velocity.x +=
-        bodies[i]->acceleration.x * state->time->delta_time * 10;
+        bodies[i]->acceleration.x * state->time.delta_time * 10;
     bodies[i]->velocity.y +=
-        bodies[i]->acceleration.y * state->time->delta_time * 10;
+        bodies[i]->acceleration.y * state->time.delta_time * 10;
     bodies[i]->position->x +=
-        bodies[i]->velocity.x * state->time->delta_time * 10;
+        bodies[i]->velocity.x * state->time.delta_time * 10;
     bodies[i]->position->y +=
-        bodies[i]->velocity.y * state->time->delta_time * 10;
+        bodies[i]->velocity.y * state->time.delta_time * 10;
   }
 }
 

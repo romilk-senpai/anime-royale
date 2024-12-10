@@ -28,12 +28,12 @@ UIButton *button_new(GameState *state, Vector2 size, char *bg_sprite_path,
 
 static void update(void *self, GameState *state) {
   UIButton *button = (UIButton *)self;
-  Vector2 mouse_pos = state->input->mouse_pos;
+  Vector2 mouse_pos = state->input.mouse_pos;
   button->hovered = mouse_pos.x > button->go->position.y &&
                     mouse_pos.x < button->go->position.x + button->size.x &&
                     mouse_pos.y > button->go->position.y &&
                     mouse_pos.y < button->go->position.y + button->size.y;
-  if (button->hovered && state->input->mouse_down) {
+  if (button->hovered && state->input.mouse_down) {
     if (button->onclick != NULL) {
       button->onclick(state, button->event_context);
     }

@@ -18,7 +18,7 @@ BasicBullet *bullet_new(GameState *state, Vector2 position, Vector2 direction,
 
   bullet->go = go;
   bullet->direction = direction;
-  bullet->destroy_time = state->time->time + life_time;
+  bullet->destroy_time = state->time.time + life_time;
 
   go_pool_bind(state->go_pool, go);
 
@@ -27,14 +27,14 @@ BasicBullet *bullet_new(GameState *state, Vector2 position, Vector2 direction,
 
 static void update(void *self, GameState *state) {
   BasicBullet *bullet = (BasicBullet *)self;
-  if (state->time->time > bullet->destroy_time) {
+  if (state->time.time > bullet->destroy_time) {
     bullet_free(bullet, state);
     return;
   }
   bullet->go->position = vector2_add(
       bullet->go->position,
       vector2_mul_scalar(bullet->direction,
-                         BASIC_BULLET_SPEED * state->time->delta_time));
+                         BASIC_BULLET_SPEED * state->time.delta_time));
 }
 
 static void render(void *self, GameState *state) {
@@ -44,7 +44,7 @@ static void render(void *self, GameState *state) {
   rect.h = 15;
 
   Vector2 render_pos = world_to_screen_pos(
-      state->camera, (Vector2){bullet->go->position.x - rect.w / 2.0,
+      &state->camera, (Vector2){bullet->go->position.x - rect.w / 2.0,
                                bullet->go->position.y - rect.h / 2.0});
 
   rect.x = render_pos.x;

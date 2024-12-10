@@ -26,19 +26,19 @@ AutoRifle *auto_rifle_new(GameState *state) {
 static void fire(void *self, GameState *state) {
   AutoRifle *a_rifle = (AutoRifle *)self;
 
-  if (state->time->time - a_rifle->last_shot_time <
+  if (state->time.time - a_rifle->last_shot_time <
       1.0f / AUTO_RIFLE_FIRE_RATE) {
     return;
   }
 
   Vector2 direction = vector2_normalize(
-      vector2_sub(state->input->mouse_pos,
-                  world_to_screen_pos(state->camera, a_rifle->go->position)));
+      vector2_sub(state->input.mouse_pos,
+                  world_to_screen_pos(&state->camera, a_rifle->go->position)));
 
   BasicBullet *bullet =
       bullet_new(state, a_rifle->go->position, direction, 0.5f);
 
-  a_rifle->last_shot_time = state->time->time;
+  a_rifle->last_shot_time = state->time.time;
 }
 
 static void update(void *self, GameState *state) {}

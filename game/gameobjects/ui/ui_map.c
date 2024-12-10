@@ -34,16 +34,16 @@ static void render(void *self, GameState *state) {
   SDL_Rect map_rect_outer;
   map_rect_outer.w = 484;
   map_rect_outer.h = 484;
-  map_rect_outer.x = state->camera->viewbox.x / 2.0f - map_rect_outer.w / 2.0f;
-  map_rect_outer.y = state->camera->viewbox.y / 2.0f - map_rect_outer.h / 2.0f;
+  map_rect_outer.x = state->camera.viewbox.x / 2.0f - map_rect_outer.w / 2.0f;
+  map_rect_outer.y = state->camera.viewbox.y / 2.0f - map_rect_outer.h / 2.0f;
   SDL_SetRenderDrawColor(state->renderer, 200, 200, 200, 255);
   SDL_RenderFillRect(state->renderer, &map_rect_outer);
 
   SDL_Rect map_rect;
   map_rect.w = 480;
   map_rect.h = 480;
-  map_rect.x = state->camera->viewbox.x / 2.0f - map_rect.w / 2.0f;
-  map_rect.y = state->camera->viewbox.y / 2.0f - map_rect.h / 2.0f;
+  map_rect.x = state->camera.viewbox.x / 2.0f - map_rect.w / 2.0f;
+  map_rect.y = state->camera.viewbox.y / 2.0f - map_rect.h / 2.0f;
   SDL_SetRenderDrawColor(state->renderer, 24, 24, 24, 255);
   SDL_RenderFillRect(state->renderer, &map_rect);
 

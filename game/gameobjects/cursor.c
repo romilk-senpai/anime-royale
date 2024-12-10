@@ -23,7 +23,7 @@ Cursor *cursor_new(GameState *state) {
 
 static void update(void *self, GameState *state) {
   Cursor *c = (Cursor *)self;
-  c->go->position = state->input->mouse_pos;
+  c->go->position = state->input.mouse_pos;
 }
 
 static void render(void *self, GameState *state) {

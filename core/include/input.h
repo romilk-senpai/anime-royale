@@ -11,14 +11,15 @@ typedef struct {
 } ItemSoltInput;
 
 typedef struct {
+  int quit;
   Vector2 movement;
   Vector2 mouse_pos;
   int mouse_held;
   int mouse_down;
   int map;
-  ItemSoltInput *item_slot_input;
+  ItemSoltInput item_slot_input;
 } Input;
 
-Input *input_new();
+void input_handle(Input *self);
 
 #endif
